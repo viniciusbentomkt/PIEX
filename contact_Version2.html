@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contato — Meu Site</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">MeuSite</a>
+      <button id="navToggle6" class="nav-toggle" aria-label="Abrir menu">☰</button>
+      <nav id="siteNav6" class="nav">
+        <a href="index.html">Início</a>
+        <a href="about.html">Sobre</a>
+        <a href="services.html">Serviços</a>
+        <a href="portfolio.html">Portfólio</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html" class="btn-primary active">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Contato</h1>
+    <p>Use o formulário abaixo ou envie um e-mail para <a href="mailto:contato@meusite.com">contato@meusite.com</a>.</p>
+
+    <form id="contactForm" class="contact-form" action="#" method="post" novalidate>
+      <label>
+        Nome
+        <input type="text" name="name" required />
+      </label>
+
+      <label>
+        E‑mail
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        Mensagem
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Enviar</button>
+      </div>
+
+      <p id="formMsg" class="form-msg" aria-live="polite"></p>
+    </form>
+
+    <p>Observação: como é um site estático, posso integrar Formspree / Netlify Forms / Getform se quiser que o formulário envie e-mails sem backend.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year6"></span> MeuSite</small>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

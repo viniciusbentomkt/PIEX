@@ -1,0 +1,18 @@
+:root{
+  --bg: #ffffff;
+  --text: #0f172a;
+  --accent: #2563eb;
+  font-size: 16px;
+}
+
+html,body,#__next {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Estilos mínimos para links */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
