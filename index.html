@@ -1,56 +1,125 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home — Meu Site</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="utf-8">
+  <title>Estacionamento Digital — PIEX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Projeto PIEX — Estacionamento Digital. Solução simples para compra de créditos, ativação de vagas e gestão de notificações.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preload" href="images/hero.jpg" as="image">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">MeuSite</a>
-      <button id="navToggle" class="nav-toggle" aria-label="Abrir menu">☰</button>
-      <nav id="siteNav" class="nav">
-        <a href="index.html">Início</a>
-        <a href="about.html">Sobre</a>
-        <a href="services.html">Serviços</a>
-        <a href="portfolio.html">Portfólio</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html" class="btn-primary">Contato</a>
-      </nav>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#home" class="logo">PIEX</a>
+    <nav class="nav" id="nav">
+      <a href="#home">Início</a>
+      <a href="#missao">Missão</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-controls="nav" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero" role="banner" aria-label="Destaque">
+    <div class="hero-bg" style="background-image:url('images/hero.jpg')"></div>
+    <div class="container hero-content">
+      <h1>Estacionamento Digital</h1>
+      <p>Créditos, ativação de vagas e lembretes — tudo em um só lugar.</p>
+      <a href="#servicos" class="btn">Conheça os serviços</a>
     </div>
-  </header>
+  </section>
 
-  <main class="container">
-    <section class="hero">
-      <h1>Bem‑vindo ao MeuSite</h1>
-      <p>Um site estático, leve e fácil de manter. Substitua este conteúdo pelo seu.</p>
-      <p><a class="btn-primary" href="contact.html">Fale conosco</a></p>
-    </section>
-
-    <section class="features">
-      <article>
-        <h2>Serviços</h2>
-        <p>Breve descrição dos serviços oferecidos.</p>
-      </article>
-      <article>
-        <h2>Portfólio</h2>
-        <p>Mostre trabalhos e cases.</p>
-      </article>
-      <article>
-        <h2>Blog</h2>
-        <p>Compartilhe artigos e novidades.</p>
-      </article>
-    </section>
-  </main>
-
-  <footer class="site-footer">
+  <!-- MISSÃO -->
+  <section id="missao" class="section">
     <div class="container">
-      <small>© <span id="year"></span> MeuSite — Todos os direitos reservados.</small>
+      <h2>Missão</h2>
+      <p>
+        Promover mobilidade urbana acessível, ajudando motoristas a regularizar o estacionamento rotativo
+        com praticidade, transparência e educação no trânsito.
+      </p>
+      <ul class="bullets">
+        <li>Acesso simples via web</li>
+        <li>Créditos e ativações em segundos</li>
+        <li>Alertas e lembretes configuráveis</li>
+      </ul>
     </div>
-  </footer>
+  </section>
 
-  <script src="assets/js/main.js"></script>
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="section section-alt">
+    <div class="container">
+      <h2>Serviços</h2>
+
+      <div class="cards">
+        <article class="card">
+          <img src="images/service1.jpg" alt="Pessoa usando celular para ativar vaga de estacionamento">
+          <h3>Ative sua vaga</h3>
+          <p>Insira placa e tempo desejado. Receba confirmação imediata e lembrete antes do vencimento.</p>
+        </article>
+
+        <article class="card">
+          <img src="images/service2.jpg" alt="Carteira digital com créditos">
+          <h3>Créditos digitais</h3>
+          <p>Compre e gerencie créditos sem filas, com histórico de uso e recibos.</p>
+        </article>
+
+        <article class="card">
+          <img src="images/service3.jpg" alt="Notificações de lembrete no smartphone">
+          <h3>Lembretes</h3>
+          <p>Configure alertas para evitar multas e renovar a tempo, direto no seu aparelho.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section">
+    <div class="container">
+      <h2>Contato</h2>
+      <p>Envie uma mensagem ou sugestões para o projeto.</p>
+
+      <!-- Opção 1 (sem back-end): Formspree / Getform
+           Substitua action="" pela URL do seu formulário quando criar o endpoint gratuito. -->
+      <form class="form" method="post" action="" aria-label="Formulário de contato">
+        <div class="grid-2">
+          <label>
+            <span>Nome</span>
+            <input type="text" name="nome" required autocomplete="name">
+          </label>
+          <label>
+            <span>E-mail</span>
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+        </div>
+        <label>
+          <span>Mensagem</span>
+          <textarea name="mensagem" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn">Enviar</button>
+        <p class="form-hint">Sem back-end: use <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> ou <a href="https://getform.io" target="_blank" rel="noopener">Getform</a>.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2025 PIEX — Estacionamento Digital</p>
+    <nav class="footer-nav">
+      <a href="#missao">Missão</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
