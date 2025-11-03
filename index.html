@@ -1,125 +1,153 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8">
-  <title>Estacionamento Digital — PIEX</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Projeto PIEX — Estacionamento Digital. Solução simples para compra de créditos, ativação de vagas e gestão de notificações.">
-  <link rel="stylesheet" href="assets/css/styles2.css">
-  <link rel="preload" href="images/hero.jpg" as="image">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia ZAE Curitiba - Projeto (Colorindo a Alegria)</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#home" class="logo">PIEX</a>
-    <nav class="nav" id="nav">
-      <a href="#home">Início</a>
-      <a href="#missao">Missão</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#contato">Contato</a>
-    </nav>
-    <button class="burger" id="burger" aria-label="Abrir menu" aria-controls="nav" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo_colorindo.png" alt="Logo Colorindo a Alegria">
+            </a>
 
-<main>
-  <!-- HERO -->
-  <section id="home" class="hero" role="banner" aria-label="Destaque">
-    <div class="hero-bg" style="background-image:url('images/hero.jpg')"></div>
-    <div class="container hero-content">
-      <h1>Estacionamento Digital</h1>
-      <p>Créditos, ativação de vagas e lembretes — tudo em um só lugar.</p>
-      <a href="#servicos" class="btn">Conheça os serviços</a>
-    </div>
-  </section>
+            <ul class="nav-menu">
+                <li><a href="como-usar.html">Como Funciona</a></li>
+                <li><a href="#">Pontos de Venda</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
 
-  <!-- MISSÃO -->
-  <section id="missao" class="section">
-    <div class="container">
-      <h2>Missão</h2>
-      <p>
-        Promover mobilidade urbana acessível, ajudando motoristas a regularizar o estacionamento rotativo
-        com praticidade, transparência e educação no trânsito.
-      </p>
-      <ul class="bullets">
-        <li>Acesso simples via web</li>
-        <li>Créditos e ativações em segundos</li>
-        <li>Alertas e lembretes configuráveis</li>
-      </ul>
-    </div>
-  </section>
+            <div class="accessibility-tools">
+                <button id="btn-open-accessibility" title="Abrir Opções de Acessibilidade">
+                    Acessibilidade
+                </button>
+            </div>
+            
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
 
-  <!-- SERVIÇOS -->
-  <section id="servicos" class="section section-alt">
-    <div class="container">
-      <h2>Serviços</h2>
-
-      <div class="cards">
-        <article class="card">
-          <img src="images/service1.jpg" alt="Pessoa usando celular para ativar vaga de estacionamento">
-          <h3>Ative sua vaga</h3>
-          <p>Insira placa e tempo desejado. Receba confirmação imediata e lembrete antes do vencimento.</p>
-        </article>
-
-        <article class="card">
-          <img src="images/service2.jpg" alt="Carteira digital com créditos">
-          <h3>Créditos digitais</h3>
-          <p>Compre e gerencie créditos sem filas, com histórico de uso e recibos.</p>
-        </article>
-
-        <article class="card">
-          <img src="images/service3.jpg" alt="Notificações de lembrete no smartphone">
-          <h3>Lembretes</h3>
-          <p>Configure alertas para evitar multas e renovar a tempo, direto no seu aparelho.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
-  <section id="contato" class="section">
-    <div class="container">
-      <h2>Contato</h2>
-      <p>Envie uma mensagem ou sugestões para o projeto.</p>
-
-      <!-- Opção 1 (sem back-end): Formspree / Getform
-           Substitua action="" pela URL do seu formulário quando criar o endpoint gratuito. -->
-      <form class="form" method="post" action="" aria-label="Formulário de contato">
-        <div class="grid-2">
-          <label>
-            <span>Nome</span>
-            <input type="text" name="nome" required autocomplete="name">
-          </label>
-          <label>
-            <span>E-mail</span>
-            <input type="email" name="email" required autocomplete="email">
-          </label>
+    <main>
+        <section class="hero">
+    <div class="hero-container"> 
+        <div class="hero-content container"> 
+            <h1>Aprenda a usar o Estacionamento Rotativo</h1>
+            <p>Um guia pensado para ajudar nossos idosos a entender as opções em Curitiba com mais tranquilidade.</p>
+            <div class="hero-buttons">
+                <a href="como-usar.html" class="btn btn-primary">Ver o Passo-a-Passo</a>
+                <a href="contato.html" class="btn btn-secondary">Pedir Ajuda</a>
+            </div>
         </div>
-        <label>
-          <span>Mensagem</span>
-          <textarea name="mensagem" rows="5" required></textarea>
-        </label>
-        <button type="submit" class="btn">Enviar</button>
-        <p class="form-hint">Sem back-end: use <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a> ou <a href="https://getform.io" target="_blank" rel="noopener">Getform</a>.</p>
-      </form>
     </div>
-  </section>
-</main>
+</section>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>© 2025 PIEX — Estacionamento Digital</p>
-    <nav class="footer-nav">
-      <a href="#missao">Missão</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#contato">Contato</a>
-    </nav>
-  </div>
-</footer>
+        <section class="como-funciona">
+            <div class="container">
+                <h2>Como Funciona</h2>
+                <p class="section-subtitle">Um guia fácil para você usar o estacionamento digital.</p>
+                
+                <div class="passos-container">
+                    <div class="passo">
+                        <img src="assets/images/icon-entenda.svg" alt="Ícone de Lâmpada">
+                        <h3>1. Entenda o Sistema</h3>
+                        <p>O estacionamento é rotativo (ZAE). Você paga pelo tempo que usa a vaga.</p>
+                    </div>
+                    <div class="passo">
+                        <img src="assets/images/icon-canais.svg" alt="Ícone de Opções">
+                        <h3>2. Conheça os Canais</h3>
+                        <p>Você pode ativar por Apps credenciados ou em Pontos de Venda (PDV) físicos.</p>
+                    </div>
+                    <div class="passo">
+                        <img src="assets/images/icon-ativar.svg" alt="Ícone de Carro">
+                        <h3>3. Ative seu Ticket</h3>
+                        <p>Informe a placa e o tempo. O agente do PDV ou o App ativam para você.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="canais-ativacao">
+            <div class="container">
+                <h2>Canais de Ativação</h2>
+                <p class="section-subtitle">Você não precisa de um único app. Escolha o que for mais fácil!</p>
+                
+                <div class="canais-container">
+                    <div class="canal">
+                        <img src="assets/images/icon-apps.svg" alt="Ícone de Aplicativos">
+                        <h3>Aplicativos Credenciados</h3>
+                        <p>Existem vários aplicativos autorizados pela prefeitura. Você pode escolher qualquer um deles.</p>
+                        <a href="#" class="btn-text">Ver lista de apps (Exemplo)</a>
+                    </div>
+                    
+                    <div class="canal">
+                        <img src="assets/images/icon-pdv.svg" alt="Ícone de Loja">
+                        <h3>Pontos de Venda (PDV)</h3>
+                        <p>Prefere pagar com dinheiro? Procure uma loja, banca ou agente credenciado com a placa do ZAE.</p>
+                        <a href="#" class="btn-text">Ver mapa de pontos (Exemplo)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<script src="assets/js/main.js" defer></script>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container container">
+            <div class="footer-col">
+                <img src="assets/images/logo_colorindo.png" alt="Logo Colorindo a Alegria" class="footer-logo">
+                <p>Um projeto educacional sobre o Estacionamento Digital de Curitiba.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="como-usar.html">Como Funciona</a></li>
+                    <li><a href="#">Pontos de Venda</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Dúvidas Frequentes</a></li>
+                    <li><a href="contato.html">Pedir Ajuda</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Projeto</h4>
+                <p>Feito por: Marcelo, Matheus Sant, Alisson, Mateus e Vinicius.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Colorindo a Alegria. Todos os direitos reservados. (Projeto de Faculdade)</p>
+        </div>
+    </footer>
+
+    <div id="accessibility-popup" class="popup-container">
+        <div class="popup-content">
+            <button id="btn-close-popup" class="popup-close-btn" title="Fechar">&times;</button>
+            <h3>Opções de Acessibilidade</h3>
+            <p>Ajuste o site para sua preferência.</p>
+            <button id="btn-contrast"><span>Alto Contraste</span></button>
+            <button id="btn-font-increase"><span>Aumentar Fonte (A+)</span></button>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
