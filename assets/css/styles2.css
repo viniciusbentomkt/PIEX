@@ -4,10 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 :root {
-    --cor-principal: #00aeef; 
-    --cor-secundaria: #ed1c24;
-    --cor-texto: #333;
-    --cor-texto-claro: #666;
+    --cor-principal: #ff6a49; 
+    --cor-secundaria: #ed1c24; 
+    --cor-amarela: #FFC72C; 
+    --cor-whatsapp: #25D366; /* <-- NOVO: Cor do WhatsApp */
+    --cor-texto: #222; 
+    --cor-texto-claro: #555; 
     --cor-fundo: #ffffff;
     --cor-fundo-leve: #f8f9fa;
 }
@@ -16,7 +18,7 @@
 body { font-family: 'Poppins', sans-serif; color: var(--cor-texto); line-height: 1.6; }
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 img { max-width: 100%; display: block; }
-a { text-decoration: none; color: var(--cor-principal); }
+a { text-decoration: none; color: var(--cor-principal); } 
 h1, h2, h3 { margin-bottom: 1rem; font-weight: 700; }
 h1 { font-size: 2.8rem; }
 h2 { font-size: 2rem; text-align: center; }
@@ -38,27 +40,24 @@ h2 { font-size: 2rem; text-align: center; }
 /* 3. HERO (Banner Principal - PONTA A PONTA)    */
 /* ============================================= */
 .hero {
-    background: #5a5a5a; /* Cor de fundo se a imagem falhar */
-    padding: 0; /* Remove padding, pois ele vai para o container */
-    width: 100%; /* Garante largura total */
-    /* REMOVIDO: max-width, margin, border-radius, overflow */
+    background: #5a5a5a; 
+    padding: 0; 
+    width: 100%; 
 }
 
 .hero-container {
-    background-image: url('../../images/bannerprincipal.png'); /* Sua imagem de fundo */
-    background-size: cover; /* Faz a imagem cobrir todo o container */
-    background-position: center; /* Centraliza a imagem */
+    background-image: url('../../images/bannerprincipal.png'); 
+    background-size: 100% auto; 
+    background-position: center center; 
     background-repeat: no-repeat;
     position: relative;
-    padding: 100px 0; /* Padding vertical (aumentado), 0 horizontal */
+    padding: 100px 0; 
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alinha o .hero-content (que é um .container) */
-    min-height: 450px; /* Altura mínima para o banner */
-    /* REMOVIDO: border-radius */
+    justify-content: flex-start; 
+    min-height: 500px; 
 }
 
-/* Overlay para escurecer a imagem e melhorar a leitura do texto */
 .hero-container::before {
     content: '';
     position: absolute;
@@ -66,35 +65,28 @@ h2 { font-size: 2rem; text-align: center; }
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Preto semi-transparente */
-    /* REMOVIDO: border-radius */
+    background-color: rgba(0, 0, 0, 0.4); 
 }
 
-/*
- * O .hero-content agora também tem a classe .container 
- * (max-width: 1100px, margin: auto, padding: 0 20px) 
- * vindo da regra global, então o texto fica centralizado!
-*/
 .hero-content {
-    flex: 0 0 50%; /* Ocupa 50% da largura do .container */
-    position: relative; /* Para ficar acima do overlay */
-    z-index: 2; /* Garante que o texto fique acima do overlay */
-    color: #fff; /* Cor do texto agora é branca */
-    padding: 20px; /* Padding interno para o texto não colar nas bordas */
-    border-radius: 8px; /* Pequeno radius para a caixa de texto */
-    /* background-color: rgba(0, 0, 0, 0.6); */ /* Descomente se precisar de mais contraste */
+    flex: 0 0 50%; 
+    position: relative; 
+    z-index: 2; 
+    color: #fff; 
+    padding: 20px; 
+    border-radius: 8px; 
 }
 
 .hero-content h1 {
     line-height: 1.2;
-    color: #fff; /* Título branco */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Sombra para melhorar leitura */
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); 
 }
 
 .hero-content p {
     font-size: 1.1rem;
     margin-bottom: 2rem;
-    color: #f0f0f0; /* Parágrafo mais claro */
+    color: #f0f0f0; 
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
 
@@ -102,34 +94,149 @@ h2 { font-size: 2rem; text-align: center; }
     display: flex;
     gap: 15px;
 }
-.btn { padding: 12px 25px; border-radius: 5px; font-weight: 500; display: inline-block; transition: all 0.3s ease; }
+.btn { 
+    padding: 12px 25px; 
+    border-radius: 5px; 
+    font-weight: 700; 
+    font-size: 1.05rem; 
+    display: inline-block; 
+    transition: all 0.3s ease; 
+    text-align: center;
+}
 .btn-primary { background: var(--cor-secundaria); color: #fff; }
 .btn-primary:hover { background: #c00; }
-.btn-secondary { background: transparent; color: #fff; border: 1px solid #fff; } /* Botão secundário branco no hero */
-.btn-secondary:hover { background: #fff; color: var(--cor-principal); } /* Hover branco e texto azul */
+.btn-secondary { background: transparent; color: #1ff518; border: 1px solid #fff; } 
 
 
 
 /* ============================================= */
-/* 4. SEÇÃO COMO FUNCIONA                        */
+/* 4. SEÇÃO COMO FUNCIONA (ATUALIZADA)           */
 /* ============================================= */
-.como-funciona { padding: 60px 0; }
-.passos-container { display: flex; justify-content: space-between; gap: 30px; margin-top: 2rem; }
-.passo { flex: 1; text-align: center; padding: 20px; }
-.passo img { height: 80px; margin: 0 auto 1.5rem auto; }
-.passo h3 { font-size: 1.3rem; }
+.como-funciona { 
+    padding-top: 60px; 
+    background: var(--cor-amarela); 
+    overflow: hidden; 
+}
+
+.como-funciona .container {
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 0 20px; 
+    position: relative; 
+    z-index: 2; 
+}
+
+.como-funciona h2 {
+    color: #222;
+    text-align: center; 
+}
+.como-funciona .section-subtitle {
+    color: #333;
+    margin-bottom: 3rem; 
+    text-align: center; 
+}
+
+.como-funciona-grid {
+    display: grid;
+    grid-template-columns: minmax(auto, 400px) 1fr; 
+    gap: 40px; 
+    align-items: center;
+    margin-top: 3rem; 
+}
+
+.como-funciona-imagem {
+    margin-left: -20px; 
+    height: 100%;
+    overflow: hidden; 
+}
+.como-funciona-imagem img {
+    height: 100%;
+    width: auto; 
+    min-width: 100%; 
+    object-fit: cover; 
+    object-position: left bottom; 
+    border-radius: 0 15px 15px 0; 
+}
+
+.passos-container { 
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+
+.passo { 
+    background: var(--cor-secundaria); 
+    color: #fff; 
+    border-radius: 15px; 
+    padding: 25px;
+    min-height: 190px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.passo:hover {
+    transform: translateY(-5px); 
+}
+
+.passo img { 
+    height: 60px; 
+    margin: 0 auto 1rem auto;
+    filter: brightness(0) invert(1); 
+}
+.passo h3 { 
+    font-size: 1.15rem; 
+    color: #fff; 
+}
+.passo p { 
+    color: #eee; 
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.passos-container .passo:nth-child(3) {
+    grid-column: 1 / -1; /* Diz ao item para ir da linha 1 até a linha -1 (a última) */
+}
 
 /* ============================================= */
 /* 5. SEÇÃO CANAIS DE ATIVAÇÃO                   */
 /* ============================================= */
-.canais-ativacao { padding: 60px 0; background: var(--cor-fundo-leve); }
+.canais-ativacao { 
+    padding: 60px 0; 
+    background: var(--cor-fundo-leve); 
+}
 .canais-container { display: flex; justify-content: center; gap: 40px; margin-top: 2rem; }
 .canal { flex-basis: 400px; background: var(--cor-fundo); padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
 .canal img { height: 80px; margin: 0 auto 1.5rem auto; }
-.canal h3 { font-size: 1.4rem; color: var(--cor-principal); }
+.canal h3 { 
+    font-size: 1.4rem; 
+    color: var(--cor-principal); 
+}
 .canal p { margin-bottom: 1.5rem; color: var(--cor-texto-claro); }
 .btn-text { font-weight: 700; color: var(--cor-secundaria); }
 .btn-text:hover { text-decoration: underline; }
+
+.canal .app-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    text-align: left; 
+    padding-left: 15%; 
+}
+.canal .app-list li {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--cor-texto-claro);
+}
+.canal .app-list li a {
+    font-weight: 700;
+    color: var(--cor-principal);
+}
+.canal .app-list li a:hover {
+    text-decoration: underline;
+}
 
 /* ============================================= */
 /* 6. FOOTER (Rodapé)                            */
@@ -164,40 +271,67 @@ h2 { font-size: 2rem; text-align: center; }
     .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
     
-    /* Hero Responsivo */
-    /* ... dentro de @media (max-width: 768px) ... */
-    
-    /* Hero Responsivo */
     .hero {
         padding: 0;
         margin: 0;
         border-radius: 0;
     }
+    
     .hero-container {
         flex-direction: column; 
         text-align: center;
-        min-height: 350px; 
+        min-height: 450px; /* Ou um valor que funcione bem para você no mobile */
         border-radius: 0; 
         justify-content: center; 
-        padding: 60px 0; /* Padding vertical para mobile */
+        padding: 60px 0; 
+        
+        /* !! NOVO: Para mobile, queremos que a imagem cubra a área !! */
+        background-size: cover; 
+        background-position: center center; /* Pode ajustar, talvez "center top" se o rosto estiver no topo */
     }
+
     .hero-content {
         flex: 0 0 100%; 
         padding: 15px;
-        background-color: rgba(0, 0, 0, 0.448); /* Fundo mais escuro para o texto no mobile */
+        background-color: rgba(0, 0, 0, 0.205); 
     }
     .hero-buttons {
         justify-content: center;
+        flex-direction: column; 
     }
-
-    /* ... resto do seu CSS mobile ... */
     
-    .passos-container { flex-direction: column; }
+    /* !! NOVO: Estilo WhatsApp para Botão Secundário no Hero Mobile !! */
+    .hero-content .btn-secondary {
+        background: var(--cor-whatsapp);
+        color: #fff;
+        border-color: var(--cor-whatsapp);
+    }
+    .hero-content .btn-secondary:hover {
+        background: #1EAE50; /* Verde mais escuro */
+        border-color: #1EAE50;
+        color: #fff;
+    }
+    
+    .como-funciona .container {
+        padding: 0 20px; 
+    }
+    .como-funciona-grid {
+        grid-template-columns: 1fr; 
+        margin-top: 2rem;
+    }
+    .como-funciona-imagem {
+        display: none; 
+    }
+    .passos-container { 
+        grid-template-columns: 1fr; 
+    }
+    
     .footer-container { flex-direction: column; text-align: center; }
     .footer-col h4::after { left: 50%; transform: translateX(-50%); }
 
     .canais-container { flex-direction: column; }
     .canal { flex-basis: auto; }
+    .canal .app-list { padding-left: 10%; } 
 
     .accessibility-tools { margin-left: auto; margin-right: 15px; }
     .desktop-text { display: none; } 
@@ -209,6 +343,7 @@ h2 { font-size: 2rem; text-align: center; }
 /* ============================================= */
 .accessibility-tools { margin-left: 20px; }
 .mobile-text { display: none; }
+.desktop-text { display: block; }
 
 #btn-open-accessibility { background: #f1f1f1; border: 1px solid #ccc; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 500; }
 #btn-open-accessibility:hover { background: #ddd; }
@@ -238,3 +373,4 @@ body.high-contrast .popup-content { background: #111 !important; border: 1px sol
 body.high-contrast .popup-close-btn, body.high-contrast .popup-content p { color: #fff !important; }
 body.high-contrast .popup-content button:not(.popup-close-btn) { background: #333 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
 html.font-increase { font-size: 19px; }
+
