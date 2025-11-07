@@ -444,3 +444,85 @@ html.font-increase { font-size: 19px; }
 .high-contrast .card img {
   filter: grayscale(100%) contrast(150%);
 }
+
+/*
+==================================================
+ COMPLEMENTO - ALTO CONTRASTE (Cards e Passos)
+==================================================
+*/
+
+/* --- 1. Corrige os Cards "Canais de Ativação" --- */
+
+/* Força o fundo do card (que era branco) a ficar preto */
+body.high-contrast .canal {
+  background: #000 !important;
+  border: 2px solid #FFFF00 !important; /* Borda amarela para ver o card */
+  box-shadow: none !important;
+}
+
+/* Força os TÍTULOS (que eram vermelhos) a ficarem amarelos */
+body.high-contrast .canal h3 {
+  color: #FFFF00 !important;
+}
+
+/* Força os TEXTOS (que eram pretos) a ficarem brancos */
+body.high-contrast .canal p,
+body.high-contrast .canal .app-list li {
+  color: #fff !important;
+}
+
+/* Garante que TODOS os links (Android/iOS) fiquem amarelos */
+body.high-contrast .canal a {
+  color: #FFFF00 !important;
+}
+
+
+/*
+==================================================
+ CORREÇÃO FINAL - ALTO CONTRASTE (HERO, H2, ÍCONES)
+==================================================
+*/
+
+/* --- 1. Corrige o H1 e P da HERO SECTION --- */
+
+/* Força o H1 (branco) da Hero a ficar Amarelo */
+body.high-contrast .hero h1 {
+    color: #FFFF00 !important; 
+}
+
+/* Força o parágrafo (cinza) da Hero a ficar Branco */
+body.high-contrast .hero p {
+    color: #fff !important; 
+}
+
+
+/* --- 2. Corrige o H2 e P da "COMO FUNCIONA" --- */
+
+/* Força o H2 (cinza) "Como Funciona..." a ficar Amarelo */
+body.high-contrast .como-funciona .container h2 {
+    color: #FFFF00 !important;
+}
+
+/* Força o subtítulo <p> (cinza) a ficar Branco */
+body.high-contrast .como-funciona .container .section-subtitle {
+    color: #fff !important;
+}
+
+/* Força o subtítulo <p> (cinza) a ficar Branco */
+body.high-contrast .canais-ativacao .container .section-subtitle {
+    color: #fff !important;
+}
+
+body.high-contrast .canais-ativacao .container h2 {
+    color: #FFFF00 !important;
+}
+
+
+/* --- 3. Corrige os ÍCONES que sumiram --- */
+
+/* Força os ícones (que são escuros) a ficarem brancos */
+body.high-contrast .canal img,
+body.high-contrast .passo img {
+    /* Este filtro inverte a cor do ícone de preto para branco */
+    filter: brightness(0) invert(1) !important;
+}
