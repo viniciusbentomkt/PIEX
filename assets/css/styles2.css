@@ -311,6 +311,7 @@ h2 { font-size: 2rem; text-align: center; }
         border-color: #1EAE50;
         color: #fff;
     }
+
     
     .como-funciona .container {
         padding: 0 20px; 
@@ -373,4 +374,3 @@ body.high-contrast .popup-content { background: #111 !important; border: 1px sol
 body.high-contrast .popup-close-btn, body.high-contrast .popup-content p { color: #fff !important; }
 body.high-contrast .popup-content button:not(.popup-close-btn) { background: #333 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
 html.font-increase { font-size: 19px; }
-

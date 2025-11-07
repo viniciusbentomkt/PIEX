@@ -1,0 +1,131 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fale Connosco - Layout Responsivo</title>
+    <link rel="stylesheet" href="assets\css\style.css">
+    <link rel="stylesheet" href="assets\css\styles2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">
+                <img src="images/logo_colorindo.jpg" alt="Logo Colorindo a Alegria">
+            </a>
+
+            <ul class="nav-menu">
+                <li><a href="landingPage.html">Como Funciona</a></li>
+                <li><a href="https://mid.curitiba.pr.gov.br/2020/00295029.pdf">Pontos de Venda</a></li> 
+                <li><a href="Contato.html">Contato</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+            </ul>
+        
+            <div class="accessibility-tools">
+                <button id="btn-open-accessibility" title="Abrir Opções de Acessibilidade">
+                    <span class="desktop-text">Acessibilidade</span>
+                    <span class="mobile-text">Ajustes</span>
+                </button>
+            </div>
+            
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+    <main class="content-section">
+        <div class="container grid-container">
+            <div class="content-image">
+                <img src="img/Reunião.jpg", alt="Equipe em reunião de trabalho">
+            </div>
+            <div class="content-text">
+                <h2>Fale Conosco</h2>
+                <p>Estamos aqui para o ajudar. Envie-nos a sua mensagem e a nossa equipe entrará em contato com você rapidamente.</p>
+                <p>A sua opinião é muito importante para nós. Quer tenha uma questão, sugestão ou precise de assistência, estamos prontos para o ajudar. Preencha o formulário abaixo e a nossa equipa responderá o mais rapidamente possível.</p>
+                <p>Todos os campos do formulário são importantes para garantirmos uma resposta adequada às suas necessidades. Assegure-se de fornecer um endereço de e-mail válido para que possamos contatá-lo.</p>
+                <p>Caso queira uma opção mais rápida, nos contate pelo Whatsapp!</p>
+                <a href="https://wa.me/5541000000000" target="_blank" class="btn btn-secondary bt2">Pedir ajuda por WhatsApp</a>
+            </div>
+        </div>
+    </main>
+    <section class="form-section">
+        <div class="container">
+            <h3>Formulário de Contato</h3>
+            <form id="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Destino do E-mail</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="assunto">Assunto</label>
+                    <input type="text" id="assunto" name="assunto">
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" rows="6"></textarea>
+                </div>
+                <div class="buttons-wrapper">
+                <a href="#form" class="btn btn-primary">Enviar Mensagem</a>
+                </div>
+                <p class="form-disclaimer">
+                    Para submeter o formulário tem de aceitar os termos de serviço e política de privacidade. Leia os nossos termos e condições para mais informações sobre como tratamos os seus dados pessoais.
+                </p>
+            </form>
+
+        </div>
+    </section>
+            
+            <div id="accessibility-popup" class="popup-container">
+        <div class="popup-content">
+            <button id="btn-close-popup" class="popup-close-btn" title="Fechar">&times;</button>
+            <h3>Opções de Acessibilidade</h3>
+            <p>Ajuste o site para sua preferência.</p>
+            <button id="btn-contrast"><span>Alto Contraste</span></button>
+            <button id="btn-font-increase"><span>Aumentar Fonte (A+)</span></button>
+        </div>
+    </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+    <footer class="footer">
+        <div class="footer-container container">
+            <div class="footer-col">
+                <img src="images\logo_colorindo.jpg" alt="Logo Colorindo a Alegria" class="footer-logo">
+                <p>Um projeto educacional sobre o Estacionamento Digital de Curitiba.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="landingPage.html">Como Funciona</a></li>
+                    <li><a href="https://mid.curitiba.pr.gov.br/2020/00295029.pdf">Pontos de Venda</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="contato.html">Pedir Ajuda</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Projeto</h4>
+                <p>Feito por: Marcelo, Matheus Sant, Alisson, Mateus, André e Vinicius.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Colorindo a Alegria. Todos os direitos reservados. (Projeto de Faculdade)</p>
+        </div>
+    </footer>
+</html>

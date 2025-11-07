@@ -1,0 +1,433 @@
+/* --- RESET BÁSICO E VARIÁVEIS --- */
+:root {
+    --dark-blue: #FFC72C;
+    --white: #ffffff;
+    --primary-orange: #f56600; /* Cor Laranja Antiga */
+    --text-color: #333; /* Cor do texto padrão (Preto/Cinza Escuro) */
+    --text-light: #f1f1f1; /* Cor para texto claro (Branco/Quase Branco) */
+    --border-color: #000000;
+    
+    /* Novas cores do modal e ACESSILIBILIDADE */
+    --modal-bg: #2b2b2b;
+    --modal-text: #f0f0f0;
+    --modal-btn-color: #f0ad4e; /* Cor Amarela/Dourada */
+    --high-contrast-accent: #f0ad4e; /* Cor de destaque para alto contraste (Amarelo) */
+    
+    /* VARIÁVEL PARA SUBSTITUIR O LARANJA PELO AMARELO */
+    --primary-yellow: #f0ad4e; /* Cor Principal agora é Amarela */
+}
+
+
+h3 {
+    color: var(--border-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+    /* Transição suave de cores */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- ESTILOS GERAIS (Botões e Imagens) --- */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.875rem; /* 14px */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+/* Botão Principal (Amarelo) */
+.btn-primary {
+    background-color: var(--primary-yellow);
+    color: var(--dark-blue);
+    border-color: var(--primary-yellow);
+}
+.btn-primary:hover {
+    background-color: #e09d44;
+}
+
+/* Botão "Acessibilidade" (preto/cinza escuro) */
+.btn-secondary-dark {
+    background-color: #333;
+    color: var(--white);
+    border-color: #333;
+}
+.btn-secondary-dark:hover {
+    background-color: #000;
+}
+
+/* Botão Outline (Amarelo) */
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-yellow);
+    border-color: var(--primary-yellow);
+}
+.btn-outline:hover {
+    background-color: var(--primary-yellow);
+    color: var(--dark-blue);
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+/* --- 1. CABEÇALHO --- */
+.main-header {
+    background-color: var(--white);
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Forçar a cor do logo para o padrão #333 */
+.logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color); 
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+
+
+/* --- 2. CONTEÚDO PRINCIPAL --- */
+.content-section {
+    padding: 50px 0;
+    background-color: var(--white);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.content-text h2 {
+    font-size: 2.5rem;
+    color: #000;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.content-text p {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 1rem;
+}
+
+/* --- 3. SEÇÃO DO FORMULÁRIO --- */
+.form-section {
+    background-color: var(--dark-blue);
+    color: #000000;
+    padding: 60px 0;
+}
+
+.form-section h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 18px 15px 10px 15px;
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    color: black;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 0 5px;
+    background-color: var(--dark-blue);
+    color: var(--border-color);
+    font-size: 0.85rem;
+    transition: background-color 0.3s ease;
+}
+
+.form-row {
+    display: flex;
+    gap: 25px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* CORREÇÃO: Mudar cor do texto de aviso do formulário de volta para Branco/Claro no modo normal */
+.form-disclaimer {
+    font-size: 0.8rem;
+    color: black
+    text-align: center;
+    max-width: 600px;
+    margin: 20px auto 0 auto;
+}
+
+/* --- 4. RESPONSIVIDADE (Sem Alterações) --- */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    .content-image { order: 1; }
+    .content-text { order: 2; }
+}
+
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    .content-text h2 {
+        font-size: 2rem;
+    }
+}
+
+/* =====================================================
+--- 5. ESTILOS DE ACESSIBILIDADE (MODAL) ---
+=====================================================
+*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--primary-yellow); 
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--primary-yellow); 
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-acessibilidade {
+    background-color: transparent;
+    color: var(--modal-btn-color);
+    border: 2px solid var(--modal-btn-color);
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-acessibilidade:hover {
+    background-color: var(--modal-btn-color);
+    color: var(--modal-bg);
+}
+
+.btn-primary{
+
+    background-color: rgb(255, 187, 0);
+    color: --white(--modal-bg);
+    border-color: black;
+}
+
+/* =====================================================
+--- 6. ESTILOS (MODO ALTO CONTRASTE) ---
+=====================================================
+*/
+body.high-contrast {
+    background-color: #000;
+    color: var(--high-contrast-accent); 
+}
+
+body.high-contrast .main-header {
+    background-color: #000;
+    border-bottom: 1px solid var(--high-contrast-accent); 
+}
+
+/* Garante que os links de navegação fiquem AMARELOS no modo AC */
+body.high-contrast .logo,
+body.high-contrast .main-nav a,
+body.high-contrast .content-text p,
+body.high-contrast .content-text h2 {
+    color: var(--high-contrast-accent); 
+}
+
+body.high-contrast .btn-secondary-dark {
+    background-color: var(--high-contrast-accent); 
+    color: #000;
+    border-color: var(--high-contrast-accent);
+}
+
+body.high-contrast .content-section {
+    background-color: #000;
+}
+
+/* Invertendo botões */
+body.high-contrast .btn-primary {
+    background-color: var(--high-contrast-accent); 
+    color: #000;
+    border-color: var(--high-contrast-accent);
+}
+body.high-contrast .btn-outline {
+    color: var(--high-contrast-accent); 
+    border-color: var(--high-contrast-accent);
+}
+body.high-contrast .btn-outline:hover {
+    background-color: var(--high-contrast-accent);
+    color: #000;
+}
+
+/* Formulário em alto contraste */
+body.high-contrast .form-section {
+    background-color: #000;
+}
+
+/* Força o título do formulário para amarelo no Alto Contraste */
+body.high-contrast .form-section h3 {
+    color: var(--high-contrast-accent); 
+}
+
+body.high-contrast .form-group label {
+    background-color: #000;
+    color: var(--high-contrast-accent); 
+}
+
+body.high-contrast .form-group input,
+body.high-contrast .form-group textarea {
+    border-color: var(--high-contrast-accent); 
+    color: var(--high-contrast-accent); 
+}
+
+/* Garante que o texto de aviso fique amarelo no Alto Contraste */
+body.high-contrast .form-disclaimer {
+    color: var(--high-contrast-accent);
+}
+
+/* Faz a imagem sumir em alto contraste (opcional, mas comum) */
+body.high-contrast .content-image img {
+    opacity: 0.7;
+    filter: grayscale(100%);
+}
+
+ .btn-secondary.bt2 {
+    background-color: var(--cor-whatsapp); /* Pega o verde do WhatsApp da sua variável */
+    border-color: var(--cor-whatsapp);     /* Borda da mesma cor */
+    color: #fff;                           /* Texto em branco, como você pediu */
+}
+
+/* Não se esqueça do HOVER! */
+.btn-secondary.bt2:hover {
+    background-color: #1EAE50;     /* O verde mais escuro do seu outro estilo */
+    border-color: #1EAE50;         /* Borda da mesma cor */
+    color: #fff;                   /* Garante que o texto fique branco */
+}
