@@ -374,3 +374,30 @@ body.high-contrast .popup-content { background: #111 !important; border: 1px sol
 body.high-contrast .popup-close-btn, body.high-contrast .popup-content p { color: #fff !important; }
 body.high-contrast .popup-content button:not(.popup-close-btn) { background: #333 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
 html.font-increase { font-size: 19px; }
+
+/* 1. Mudar o título principal da seção (ex: "Nossos Serviços") */
+.high-contrast .container1 h2 {
+  color: #FFFF00 !important; /* Amarelo brilhante */
+}
+
+/* 2. Mudar o FUNDO do card para preto e adicionar borda */
+.high-contrast .card {
+  background: #000 !important;          /* Fundo preto */
+  border: 2px solid #FFFF00 !important; /* Borda amarela */
+  box-shadow: none !important;          /* Remove a sombra */
+}
+
+/* 3. Mudar o título DENTRO do card */
+.high-contrast .card h3 {
+  color: #FFFF00 !important; /* Amarelo brilhante */
+}
+
+/* 4. Mudar o texto (parágrafo) DENTRO do card */
+.high-contrast .card p {
+  color: #fff !important; /* Texto branco */
+}
+
+/* 5. (Opcional) Adicionar filtro nas imagens */
+.high-contrast .card img {
+  filter: grayscale(100%) contrast(150%);
+}
