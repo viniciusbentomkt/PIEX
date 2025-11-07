@@ -20,14 +20,14 @@ header h1 {
 }
 
 /* CONTAINER */
-.container {
+.container1 {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
   text-align: center;
 }
 
-.container h2 {
+.container1 h2 {
   color: #004aad;
   margin-bottom: 30px;
 }
@@ -73,12 +73,3 @@ header h1 {
   color: #555;
 }
 
-/* FOOTER */
-footer {
-  background-color: #004aad;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 40px;
-  font-size: 0.9em;
-}
