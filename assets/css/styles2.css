@@ -28,13 +28,31 @@ h2 { font-size: 2rem; text-align: center; }
 /* 2. HEADER (Menu)                              */
 /* ============================================= */
 .header { width: 100%; background: var(--cor-fundo); border-bottom: 1px solid #eee; padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
-.navbar { display: flex; justify-content: space-between; align-items: center; }
+.navbar1 { display: flex; justify-content: space-between; align-items: center; }
 .logo img { height: 45px; } 
 .nav-menu { display: flex; list-style: none; gap: 30px; }
 .nav-menu a { color: var(--cor-texto); font-weight: 500; transition: color 0.3s ease; }
 .nav-menu a:hover { color: var(--cor-principal); }
 .hamburger { display: none; cursor: pointer; }
 .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--cor-texto); transition: all 0.3s ease; }
+
+/*
+=============================================
+ CORREÇÃO DO PADDING DO MENU (UL)
+=============================================
+*/
+
+.navbar1 .nav-menu {
+  /* Remove o 'padding' de 40px do navegador */
+  padding-left: 0; 
+  
+  /* Remove as 'bolinhas' da lista */
+  list-style: none; 
+  
+  /* (Garantia) Zera a margem para evitar
+     qualquer espaçamento vertical indesejado */
+  margin: 0; 
+}
 
 /* ============================================= */
 /* 3. HERO (Banner Principal - PONTA A PONTA)    */
@@ -346,8 +364,33 @@ h2 { font-size: 2rem; text-align: center; }
 .mobile-text { display: none; }
 .desktop-text { display: block; }
 
-#btn-open-accessibility { background: #f1f1f1; border: 1px solid #ccc; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 500; }
-#btn-open-accessibility:hover { background: #ddd; }
+#btn-open-accessibility {
+  /* --- Suas regras originais --- */
+  background: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+
+  /* --- REGRAS NOVAS (Reset do Bootstrap) --- */
+
+  /* 1. Força o SEU padding a vencer o do Bootstrap */
+  padding: 8px 12px !important;
+
+  /* 2. Reduz a altura da linha (o que mais deixa o botão "grande") */
+  line-height: 1.2; /* Bootstrap usa ~1.5 */
+  
+  /* 3. Garante que o tamanho da fonte não seja herdado */
+  font-size: 1rem; /* ou 14px, 15px, etc. Ajuste se necessário */
+  
+  /* 4. Zera qualquer margem que o Bootstrap possa ter adicionado */
+  margin: 0;
+}
+
+#btn-open-accessibility:hover {
+  background: #ddd;
+}
 
 .popup-container { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center; }
 .popup-container.active { display: flex; }
