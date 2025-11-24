@@ -18,11 +18,11 @@
       </a>
 
       <ul class="nav-menu">
-                <li><a href="landingPage.html">Como Funciona</a></li>
-                <li><a href="https://mid.curitiba.pr.gov.br/2020/00295029.pdf">Pontos de Venda</a></li> 
-                <li><a href="Contato.html">Contato</a></li>
-                <li><a href="servicos.html">Serviços</a></li>
-            </ul>
+        <li><a href="landingPage.html">Como Funciona</a></li>
+        <li><a href="https://mid.curitiba.pr.gov.br/2020/00295029.pdf">Pontos de Venda</a></li>
+        <li><a href="Contato.html">Contato</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+      </ul>
 
       <div class="accessibility-tools">
         <button id="btn-open-accessibility" title="Abrir Opções de Acessibilidade">
@@ -51,10 +51,49 @@
         <section class="mb-5">
           <h2 class="text-start">1. Baixe o aplicativo</h2>
           <p>Procure por <strong>um dos aplicativos abaixo</strong> na loja de aplicativos do seu celular (Google Play
-            ou
-            App Store).<br>Os apps são oficiais e homologados pela URBS.</p>
-          <div class="text-start">
-            <img src="images/landingPage.png" alt="Apps Estar Curitiba" class="img-fluid rounded shadow">
+            ou App Store).<br>Os apps são oficiais e homologados pela URBS.</p>
+
+          <div class="row align-items-center">
+            
+            <div class="col-12 col-sm-6 mt-3 mb-3 d-flex justify-content-center">
+              <img src="images/landingPage.png" alt="Apps Estar Curitiba" class="img-fluid rounded-4">
+            </div>
+
+            <div class="col-12 col-sm-6 mb-3">
+              
+              <a href="javascript:void(0)" onclick="redirectToStore(
+                  'https://play.google.com/store/apps/details?id=br.com.estardigital.curitiba.motorista',
+                  'https://apps.apple.com/us/app/estar-digital-curitiba/id1514463680?l=pt-BR',
+                  'https://estardigital.com.br/cidades/curitiba/'
+                )">
+                <img src="img/edc.png" alt="App Estar Digital Curitiba" class="mb-2 border border-dark rounded-3 w-100 d-block">
+              </a>
+
+              <a href="javascript:void(0)" onclick="redirectToStore(
+                  'https://play.google.com/store/apps/details?id=com.estar.digital.curitiba.estacionamento.eletronico.rotativo.urbs.faz',
+                  'https://apps.apple.com/br/app/estar-digital-curitiba-faz/id1497474349',
+                  'https://estarcuritiba.app/'
+                )">
+                <img src="img/fdc.png" alt="App FAZ Digital Curitiba" class="mb-2 border border-dark rounded-3 w-100 d-block">
+              </a>
+
+              <a href="javascript:void(0)" onclick="redirectToStore(
+                  'https://play.google.com/store/apps/details?id=io.meuestar.app&hl=pt_BR',
+                  'https://apps.apple.com/br/app/meu-estar-digital-curitiba/id1491953591',
+                  'https://iomob.com/br/#contato'
+                )">
+                <img src="img/mdc.png" alt="App Meu Estar Curitiba" class="mb-2 border border-dark rounded-3 w-100 d-block">
+              </a>
+
+              <a href="javascript:void(0)" onclick="redirectToStore(
+                  'https://play.google.com/store/apps/details?id=br.com.amaralina.zazul.curitiba',
+                  'https://apps.apple.com/br/app/zazul-estar-digital-curitiba/id1500774327',
+                  'https://curitiba.zazuldigital.com.br/'
+                )">
+                <img src="img/zdc.png" alt="App Zazul Curitiba" class="mb-2 border border-dark rounded-3 w-100 d-block">
+              </a>
+
+            </div>
           </div>
         </section>
 
@@ -137,41 +176,75 @@
     <section class="col-1 col-md-2"></section>
   </section>
 
-  
-    <footer class="footer">
-        <div class="footer-container container">
-            <div class="footer-col">
-                <img src="images\logo_colorindo.jpg" alt="Logo Colorindo a Alegria" class="footer-logo">
-                <p>Um projeto educacional sobre o Estacionamento Digital de Curitiba.</p>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Navegação</h4>
-                <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="landingPage.html">Como Funciona</a></li>
-                    <li><a href="https://mid.curitiba.pr.gov.br/2020/00295029.pdf">Pontos de Venda</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Suporte</h4>
-                <ul>
-                    <li><a href="contato.html">Pedir Ajuda</a></li>
-                </ul>
-            </div>
 
-            <div class="footer-col">
-                <h4>Projeto</h4>
-                <p>Feito por: Marcelo, Matheus Sant, Alisson, Mateus, André e Vinicius.</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Colorindo a Alegria. Todos os direitos reservados. (Projeto de Faculdade)</p>
-        </div>
-    </footer>
+  <footer class="footer">
+    <div class="footer-container container">
+      <div class="footer-col">
+        <img src="images\logo_colorindo.jpg" alt="Logo Colorindo a Alegria" class="footer-logo">
+        <p>Um projeto educacional sobre o Estacionamento Digital de Curitiba.</p>
+      </div>
 
-  <div id="accessibility-popup" class="popup-container">
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="landingPage.html">Como Funciona</a></li>
+          <li><a href="https://mid.curitiba.pr.gov.br/2020/00295029.pdf">Pontos de Venda</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Suporte</h4>
+        <ul>
+          <li><a href="contato.html">Pedir Ajuda</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Projeto</h4>
+        <p>Feito por: Marcelo, Matheus Sant, Alisson, Mateus, André e Vinicius.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Colorindo a Alegria. Todos os direitos reservados. (Projeto de Faculdade)</p>
+    </div>
+  </footer>
+
+  <!-- Script para verificar o dispositivo -->
+  <script>
+    function getOS() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Verifica se é smartPhone e se é android ou iphone
+      const isMobile = /Mobile|Android|iP(ad|hone|od)/i.test(userAgent);
+
+      if (isMobile) {
+        if (/android/i.test(userAgent)) {
+          return "Android";
+        }
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "iOS";
+        }
+      }
+      // Se não for smartPhone trata como um PC e abre a pagina do desenvolvedor da aplicativo
+      return "PC";
+    }
+
+    //Funcao que recebe os links das lojas ou site do desenvolvedor, que será chamado caso nao seja um smartphone
+    function redirectToStore(playStore, appStore, appPage) {
+      const os = getOS();
+
+      if (os === "Android") {
+        window.location.href = playStore;
+      } else if (os === "iOS") {
+        window.location.href = appStore;
+      } else {
+        window.open(appPage, "_blank");
+      }
+    }
+  </script>
+
+   <div id="accessibility-popup" class="popup-container">
     <div class="popup-content">
       <button id="btn-close-popup" class="popup-close-btn" title="Fechar">&times;</button>
       <h3>Opções de Acessibilidade</h3>

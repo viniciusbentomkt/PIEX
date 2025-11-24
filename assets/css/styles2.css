@@ -526,3 +526,35 @@ body.high-contrast .passo img {
     /* Este filtro inverte a cor do ícone de preto para branco */
     filter: brightness(0) invert(1) !important;
 }
+
+/* --- Lógica de Aumento de Fonte --- */
+
+/* Quando a classe 'font-increase' estiver ativa na tag HTML */
+html.font-increase body {
+    /* Aumenta a fonte base levemente */
+    font-size: 1.2rem; 
+}
+
+/* AQUI O PULO DO GATO: Forçar aumento específico em parágrafos e listas */
+html.font-increase p,
+html.font-increase li,
+html.font-increase a,
+html.font-increase span {
+    font-size: 1.5rem !important; /* 24px (Padrão costuma ser 16px) */
+    line-height: 1.8 !important;   /* Aumenta o espaço entre linhas para não embaralhar */
+}
+
+/* Aumentar ainda mais os Títulos (h1, h2, h3...) */
+html.font-increase h1,
+html.font-increase h2,
+html.font-increase h3,
+html.font-increase h4 {
+    font-size: 130% !important; /* Aumenta 30% além do tamanho que o título já tem */
+    margin-bottom: 1.5rem !important;
+}
+
+/* Ajuste opcional para não quebrar botões se ficarem muito grandes */
+html.font-increase .btn {
+    font-size: 1.2rem !important;
+    white-space: normal; /* Permite que o texto do botão quebre linha se precisar */
+}

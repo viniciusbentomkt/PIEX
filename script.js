@@ -61,3 +61,4 @@ contrastButton.addEventListener("click", () => {
 fontIncreaseButton.addEventListener("click", () => {
     htmlElement.classList.toggle("font-increase");
 });
+
