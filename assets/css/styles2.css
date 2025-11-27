@@ -765,3 +765,86 @@ body.high-contrast #btn-open-accessibility:hover {
     background-color: #333333 !important; /* Cinza escuro ao passar o mouse */
     color: #FFFF00 !important;
 }
+
+/* =========================================================
+   AJUSTE DE ACESSIBILIDADE - APENAS COMPUTADOR (PC)
+   Quando a fonte aumenta, removemos a imagem e expandimos os textos
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+    /* 1. Esconde a imagem do "Homem de Moletom" */
+    html.font-increase .como-funciona-imagem {
+        display: none !important;
+    }
+
+    /* 2. Ajusta o Grid Principal para usar 1 coluna só (largura total) */
+    html.font-increase .como-funciona-grid {
+        /* Antes era: Imagem | Texto. Agora vira só Texto (1fr) */
+        grid-template-columns: 1fr !important; 
+        margin-top: 2rem !important;
+    }
+
+    /* 3. Aumenta o tamanho dos cards (Passos) */
+    html.font-increase .passo {
+        padding: 40px 30px !important; /* Mais preenchimento interno */
+        min-height: 250px !important;  /* Garante que o card fique mais alto */
+    }
+
+    /* 4. Aumenta ainda mais o texto DENTRO dos cards para aproveitar o espaço */
+    html.font-increase .passo p {
+        font-size: 1.4rem !important; /* Texto bem grande e legível */
+        line-height: 1.8 !important;
+    }
+    
+    html.font-increase .passo h3 {
+        font-size: 1.8rem !important; /* Título do card maior */
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+/* =========================================================
+   CORREÇÃO: FORMULÁRIO DE CONTATO (ALTO CONTRASTE)
+   ========================================================= */
+
+/* 1. Labels e Textos do Formulário -> AMARELO */
+body.high-contrast label,
+body.high-contrast .form-label,
+body.high-contrast legend,
+body.high-contrast span {
+    color: #FFFF00 !important;
+}
+
+/* 2. Caixas de Texto (Input e Textarea) */
+body.high-contrast input,
+body.high-contrast textarea,
+body.high-contrast select,
+body.high-contrast .form-control {
+    background-color: #000000 !important; /* Fundo Preto */
+    border: 2px solid #FFFF00 !important; /* Borda Amarela */
+    color: #FFFFFF !important;            /* Texto digitado fica BRANCO (para melhor leitura) */
+    box-shadow: none !important;          /* Remove sombras azuis do Bootstrap */
+}
+
+/* 3. Quando clica na caixa (Foco) */
+body.high-contrast .form-control:focus {
+    border-color: #FFFF00 !important;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5) !important; /* Brilho amarelo opcional */
+}
+
+/* 4. Botão de Enviar (Submit) */
+/* Fundo Amarelo + Texto Preto (para contraste) */
+body.high-contrast button[type="submit"],
+body.high-contrast .btn-primary {
+    background-color: #FFFF00 !important;
+    border-color: #FFFF00 !important;
+    color: #000000 !important; 
+    font-weight: bold !important;
+}
+
+/* Efeito Hover no Botão (Passar o mouse) */
+body.high-contrast button[type="submit"]:hover,
+body.high-contrast .btn-primary:hover {
+    background-color: #dddd00 !important; /* Amarelo um pouco mais escuro */
+    color: #000000 !important;
+}
