@@ -51,33 +51,44 @@
     </main>
     <section class="form-section">
         <div class="container">
-            <h3>Formulário de Contato</h3>
-            <form id="contact-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nome">Nome Completo</label>
-                        <input type="text" id="nome" name="nome">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Destino do E-mail</label>
-                        <input type="email" id="email" name="email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="assunto">Assunto</label>
-                    <input type="text" id="assunto" name="assunto">
-                </div>
-                <div class="form-group">
-                    <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" name="mensagem" rows="6"></textarea>
-                </div>
-                <div class="buttons-wrapper">
-                <a href="#form" class="btn btn-primary">Enviar Mensagem</a>
-                </div>
-                <p class="form-disclaimer">
-                    Para submeter o formulário tem de aceitar os termos de serviço e política de privacidade. Leia os nossos termos e condições para mais informações sobre como tratamos os seus dados pessoais.
-                </p>
-            </form>
+           <h3>Caso não tenha resposta via WhatsApp, preencha abaixo</h3>
+
+<form id="contact-form">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome">
+        </div>
+        <div class="form-group">
+            <label for="email">Destino do E-mail</label>
+            <input type="email" id="email" name="email">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="telefone">Telefone / Celular</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(41) 99999-9999">
+        </div>
+        <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <input type="text" id="assunto" name="assunto">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="6"></textarea>
+    </div>
+
+    <div class="buttons-wrapper">
+        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+    </div>
+
+    <p class="form-disclaimer">
+        Para submeter o formulário tem de aceitar os termos de serviço e política de privacidade. Leia os nossos termos e condições para mais informações sobre como tratamos os seus dados pessoais.
+    </p>
+</form>
 
         </div>
     </section>
