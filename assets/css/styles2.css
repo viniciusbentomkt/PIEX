@@ -476,6 +476,44 @@ body.high-contrast .canal a {
   color: #FFFF00 !important;
 }
 
+/* =========================================================
+   CORREÇÃO: TÍTULOS DOS "PASSOS" EM ALTO CONTRASTE
+   ========================================================= */
+
+/* Força o título (H3) dentro do card ".passo" a ficar AMARELO */
+body.high-contrast .passo h3 {
+    color: #FFFF00 !important; 
+}
+
+/* Garante que o texto descritivo (P) continue BRANCO */
+body.high-contrast .passo p {
+    color: #FFFFFF !important;
+}
+
+/* Se houver borda, garante que ela também fique AMARELA para destacar o card */
+body.high-contrast .passo {
+    border: 2px solid #FFFF00 !important;
+}
+
+/* =========================================================
+   CORREÇÃO: FUNDO DO MENU MOBILE (ALTO CONTRASTE)
+   ========================================================= */
+
+/* Força o fundo do menu dropdown a ser PRETO no modo alto contraste */
+body.high-contrast .nav-menu {
+    background-color: #000 !important;
+    border-bottom: 2px solid #FFFF00 !important; /* Opcional: borda para destacar onde acaba o menu */
+}
+
+/* Garante que os links dentro do menu sejam AMARELOS */
+body.high-contrast .nav-menu a {
+    color: #FFFF00 !important;
+}
+
+/* Garante que o ícone do Hamburger (as barrinhas ou o X) fiquem BRANCOS ou AMARELOS */
+body.high-contrast .hamburger .bar {
+    background-color: #FFFF00 !important;
+}
 
 /*
 ==================================================
@@ -529,32 +567,201 @@ body.high-contrast .passo img {
 
 /* --- Lógica de Aumento de Fonte --- */
 
-/* Quando a classe 'font-increase' estiver ativa na tag HTML */
-html.font-increase body {
-    /* Aumenta a fonte base levemente */
-    font-size: 1.2rem; 
+/* =========================================================
+   LÓGICA DE AUMENTO DE FONTE (CORRIGIDA PARA CSS CUSTOM)
+   ========================================================= */
+
+/* 1. Títulos (Forçamos um valor MAIOR que o seu original de 2.8rem) */
+html.font-increase h1 {
+    font-size: 3.5rem !important; /* Original era 2.8rem -> Aumentou para 3.5rem */
+    line-height: 1.2 !important;
 }
 
-/* AQUI O PULO DO GATO: Forçar aumento específico em parágrafos e listas */
+html.font-increase h2 {
+    font-size: 2.8rem !important; /* Original era 2rem -> Aumentou para 2.8rem */
+    margin-bottom: 2rem !important;
+}
+
+html.font-increase h3 {
+    font-size: 2rem !important; /* Original era 1.4rem aprox */
+}
+
+/* 2. Textos, Listas, Botões e Links */
 html.font-increase p,
 html.font-increase li,
+html.font-increase span,
 html.font-increase a,
-html.font-increase span {
-    font-size: 1.5rem !important; /* 24px (Padrão costuma ser 16px) */
-    line-height: 1.8 !important;   /* Aumenta o espaço entre linhas para não embaralhar */
-}
-
-/* Aumentar ainda mais os Títulos (h1, h2, h3...) */
-html.font-increase h1,
-html.font-increase h2,
-html.font-increase h3,
-html.font-increase h4 {
-    font-size: 130% !important; /* Aumenta 30% além do tamanho que o título já tem */
-    margin-bottom: 1.5rem !important;
-}
-
-/* Ajuste opcional para não quebrar botões se ficarem muito grandes */
 html.font-increase .btn {
-    font-size: 1.2rem !important;
-    white-space: normal; /* Permite que o texto do botão quebre linha se precisar */
+    font-size: 1.3rem !important; /* Aumenta o texto de leitura */
+    line-height: 1.8 !important;   /* Espaçamento para facilitar leitura */
+}
+
+/* =========================================================
+   CORREÇÃO: CENTRALIZAR MENU (QUANDO A FONTE AUMENTA)
+   ========================================================= */
+
+@media (max-width: 768px) {
+    /* Força o container do menu a alinhar os itens no centro */
+    html.font-increase .nav-menu {
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    /* Força cada item do menu a ter texto centralizado */
+    html.font-increase .nav-menu li,
+    html.font-increase .nav-menu a {
+        text-align: center !important;
+        justify-content: center !important;
+        display: block !important; /* Garante que ocupe a largura para poder centralizar */
+        width: 100% !important;
+    }
+}
+
+/* =========================================================
+   CORREÇÃO TOTAL DE LEIAUTE MOBILE (COM FONTE GRANDE E FIX DO "X")
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* --- 1. SEGURANÇA GERAL --- */
+    html.font-increase body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    html.font-increase .container,
+    html.font-increase .hero-content, 
+    html.font-increase .popup-content {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* --- 2. TÍTULOS --- */
+    html.font-increase h1 {
+        font-size: 2.2rem !important; 
+        line-height: 1.2 !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+    }
+    
+    html.font-increase h2 {
+        font-size: 1.8rem !important;
+        word-wrap: break-word !important;
+    }
+
+    /* --- 3. TEXTOS COMUNS --- */
+    html.font-increase p,
+    html.font-increase li,
+    html.font-increase a {
+        font-size: 1.2rem !important; 
+        line-height: 1.5 !important;
+        text-align: left;
+    }
+
+    /* --- 4. BOTÕES GERAIS (Grandes) --- */
+    html.font-increase .btn,
+    html.font-increase button {
+        font-size: 1.1rem !important;
+        white-space: normal !important;
+        height: auto !important;
+        padding: 15px 10px !important;
+        width: 100% !important;
+        display: block !important;
+        max-width: 100% !important;
+        margin-bottom: 10px !important; /* Espaço entre botões */
+    }
+
+    /* --- 5. POPUP --- */
+    html.font-increase .popup-content {
+        width: 85% !important;
+        max-width: 350px !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        position: fixed !important;
+        padding: 30px 20px 20px 20px !important; /* Mais espaço no topo pro X */
+    }
+    
+    html.font-increase .popup-content h3 {
+        font-size: 1.4rem !important;
+        word-wrap: break-word !important;
+        margin-top: 10px !important; /* Empurra o título para baixo do X */
+    }
+
+    /* --- 6. EXCEÇÃO: CORREÇÃO DO BOTÃO FECHAR (X) --- */
+    /* Aqui dizemos: "Ignore as regras de botão gigante apenas para o X" */
+    html.font-increase .popup-close-btn {
+        position: absolute !important; /* Volta a fixar no canto */
+        top: 5px !important;
+        right: 10px !important;
+        width: auto !important; /* Largura automática (pequena) */
+        height: auto !important;
+        padding: 0 !important; /* Remove o preenchimento gordo */
+        margin: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        font-size: 2rem !important; /* Mantém o X visível */
+        display: inline-block !important; /* Não ocupa a linha toda */
+    }
+    
+}
+
+/* =========================================================
+   CORREÇÃO: ALTO CONTRASTE NA LANDING PAGE (BOOTSTRAP)
+   ========================================================= */
+
+/* 1. Títulos (H1, H2, H3) -> AMARELO */
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast .h1,
+body.high-contrast .h2 {
+    color: #FFFF00 !important;
+}
+
+/* 2. Textos em Negrito (Strong) -> AMARELO (Destaque) */
+body.high-contrast strong,
+body.high-contrast b {
+    color: #FFFF00 !important;
+}
+
+/* 3. Links -> AMARELO */
+body.high-contrast a,
+body.high-contrast .link-primary {
+    color: #FFFF00 !important;
+    text-decoration: underline !important;
+}
+
+/* 4. Parágrafos e Listas -> BRANCO (Para facilitar a leitura) */
+/* Se quiser tudo amarelo, mude #FFFFFF para #FFFF00 aqui também */
+body.high-contrast p,
+body.high-contrast li,
+body.high-contrast ul,
+body.high-contrast span {
+    color: #FFFFFF !important;
+}
+
+/* 5. Forçar fundo preto ignorando o Bootstrap (.bg-light) */
+/* O Bootstrap tenta colocar fundo cinza claro, aqui nós barramos isso */
+body.high-contrast.bg-light,
+body.high-contrast .bg-light {
+    background-color: #000000 !important;
+}
+
+/* =========================================================
+   CORREÇÃO: BOTÃO ACESSIBILIDADE (EM ALTO CONTRASTE)
+   ========================================================= */
+
+body.high-contrast #btn-open-accessibility {
+    background-color: #000000 !important; /* Fundo Preto */
+    color: #FFFF00 !important;           /* Texto Amarelo */
+    border: 2px solid #FFFF00 !important; /* Borda Amarela para destacar */
+}
+
+/* Opcional: Efeito ao passar o mouse no modo alto contraste */
+body.high-contrast #btn-open-accessibility:hover {
+    background-color: #333333 !important; /* Cinza escuro ao passar o mouse */
+    color: #FFFF00 !important;
 }
