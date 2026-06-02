@@ -5,152 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Partilhar - Responsaveis</title>
   <style>
-    :root { --bg: #f7f4ef; --surface: #ffffff; --ink: #1f2a2e; --muted: #657277; --line: #d9ded8; --brand: #1f6f5b; --brand-dark: #124938; --focus: #f0b86d; --shadow: 0 14px 40px rgba(31, 42, 46, 0.1); }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
-    header { display: flex; justify-content: space-between; gap: 18px; align-items: center; padding: 22px clamp(18px, 5vw, 72px); background: rgba(255, 255, 255, 0.76); border-bottom: 1px solid var(--line); }
-    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 54px; }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 { font-size: clamp(1.4rem, 3vw, 2.2rem); }
-    p { color: var(--muted); line-height: 1.55; }
-    a { color: var(--brand-dark); font-weight: 700; }
-    .login, .section { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); padding: clamp(18px, 4vw, 28px); margin-bottom: 20px; }
-    .login-grid { display: grid; grid-template-columns: minmax(180px, 320px) auto; gap: 12px; align-items: end; }
-    label { display: grid; gap: 7px; color: var(--ink); font-weight: 780; }
-    input { min-height: 46px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
-    button { min-height: 46px; border: 0; border-radius: 8px; background: var(--brand); color: #fff; cursor: pointer; font-weight: 850; padding: 10px 16px; }
-    button.secondary { background: #fff; border: 1px solid var(--brand); color: var(--brand-dark); }
-    input:focus, button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-    .status { min-height: 24px; color: var(--brand-dark); font-weight: 750; margin: 12px 0 0; }
-    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-    .kpi { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 16px; }
-    .kpi small { display: block; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
-    .kpi strong { font-size: 2rem; color: var(--brand-dark); }
-    .tables { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-    th, td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
-    th { color: var(--brand-dark); font-size: 0.78rem; text-transform: uppercase; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 0; }
-    @media (max-width: 900px) { header { align-items: flex-start; flex-direction: column; } .login-grid, .kpis, .tables { grid-template-columns: 1fr; } }
+    :root{--bg:#f7f4ef;--surface:#fff;--ink:#1f2a2e;--muted:#657277;--line:#d9ded8;--brand:#1f6f5b;--brand-dark:#124938;--focus:#f0b86d;--shadow:0 14px 40px rgba(31,42,46,.1)}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}header{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:22px clamp(18px,5vw,72px);background:rgba(255,255,255,.76);border-bottom:1px solid var(--line)}main{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:32px 0 54px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(1.4rem,3vw,2.2rem)}p{color:var(--muted);line-height:1.55}a{color:var(--brand-dark);font-weight:700}.login,.section{border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:var(--shadow);padding:clamp(18px,4vw,28px);margin-bottom:20px}.login-grid{display:grid;grid-template-columns:minmax(180px,320px) auto;gap:12px;align-items:end}label{display:grid;gap:7px;color:var(--ink);font-weight:780}input{min-height:46px;border:1px solid var(--line);border-radius:8px;padding:10px 12px}button{min-height:46px;border:0;border-radius:8px;background:var(--brand);color:#fff;cursor:pointer;font-weight:850;padding:10px 16px}button.secondary{background:#fff;border:1px solid var(--brand);color:var(--brand-dark)}input:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}.status{min-height:24px;color:var(--brand-dark);font-weight:750;margin:12px 0 0}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.kpi{border:1px solid var(--line);border-radius:8px;background:#fff;padding:16px}.kpi small{display:block;color:var(--muted);font-weight:700;margin-bottom:8px}.kpi strong{font-size:2rem;color:var(--brand-dark)}.tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}table{width:100%;border-collapse:collapse;font-size:.92rem}th,td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}th{color:var(--brand-dark);font-size:.78rem;text-transform:uppercase}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}@media(max-width:900px){header{align-items:flex-start;flex-direction:column}.login-grid,.kpis,.tables{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <h1>Area dos responsaveis</h1>
-      <p>Resumo operacional da Partilhar com base nos registros da planilha.</p>
-    </div>
-    <a href="./">Voltar para a central</a>
-  </header>
-
+  <header><div><h1>Area dos responsaveis</h1><p>Resumo operacional da Partilhar com base nos registros da planilha.</p></div><a href="./">Voltar para a central</a></header>
   <main>
-    <section class="login">
-      <h2>Acesso</h2>
-      <div class="login-grid">
-        <label>Codigo da equipe <input id="team-code" type="password" autocomplete="current-password"></label>
-        <button id="load-report" type="button">Carregar relatorio</button>
-      </div>
-      <p class="status" id="status">Informe o codigo configurado no Apps Script.</p>
-      <div class="toolbar">
-        <a id="sheet-link" href="https://docs.google.com/spreadsheets/d/1Y222Imfvfx4M1tBjmaNuL4kekR689QTIQ53YE6eT-jU/edit" target="_blank" rel="noopener">Abrir planilha</a>
-        <button class="secondary" id="download-csv" type="button" disabled>Baixar CSV do resumo</button>
-      </div>
-    </section>
-
+    <section class="login"><h2>Acesso</h2><div class="login-grid"><label>Codigo da equipe <input id="team-code" type="password" autocomplete="current-password"></label><button id="load-report" type="button">Carregar relatorio</button></div><p class="status" id="status">Informe o codigo configurado no Apps Script.</p><div class="toolbar"><a id="sheet-link" href="https://docs.google.com/spreadsheets/d/1Y222Imfvfx4M1tBjmaNuL4kekR689QTIQ53YE6eT-jU/edit" target="_blank" rel="noopener">Abrir planilha</a><button class="secondary" id="download-csv" type="button" disabled>Baixar CSV do resumo</button></div></section>
     <section class="section" id="dashboard" hidden><h2>Resumo</h2><div class="kpis" id="kpis"></div></section>
-
-    <section class="section" id="charts-section" hidden>
-      <h2>Indicadores</h2>
-      <div class="tables">
-        <div><h3>Tipos de doacao</h3><table id="donation-types"></table></div>
-        <div><h3>Areas de voluntariado</h3><table id="volunteer-areas"></table></div>
-        <div><h3>Movimentacoes</h3><table id="movement-types"></table></div>
-        <div><h3>Produtos mais movimentados</h3><table id="top-products"></table></div>
-      </div>
-    </section>
-
-    <section class="section" id="recent-section" hidden>
-      <h2>Ultimos registros</h2>
-      <div class="tables">
-        <div><h3>Doacoes</h3><table id="recent-donations"></table></div>
-        <div><h3>Voluntarios</h3><table id="recent-volunteers"></table></div>
-        <div><h3>Estoque</h3><table id="recent-movements"></table></div>
-        <div><h3>Contatos</h3><table id="recent-contacts"></table></div>
-      </div>
-    </section>
+    <section class="section" id="charts-section" hidden><h2>Indicadores</h2><div class="tables"><div><h3>Tipos de doacao</h3><table id="donation-types"></table></div><div><h3>Areas de voluntariado</h3><table id="volunteer-areas"></table></div><div><h3>Movimentacoes</h3><table id="movement-types"></table></div><div><h3>Produtos mais movimentados</h3><table id="top-products"></table></div></div></section>
+    <section class="section" id="recent-section" hidden><h2>Ultimos registros</h2><div class="tables"><div><h3>Doacoes</h3><table id="recent-donations"></table></div><div><h3>Voluntarios</h3><table id="recent-volunteers"></table></div><div><h3>Estoque</h3><table id="recent-movements"></table></div><div><h3>Contatos</h3><table id="recent-contacts"></table></div></div></section>
   </main>
-
   <script>
-    const CONFIG = { appsScriptUrl: "", sheetUrl: "https://docs.google.com/spreadsheets/d/1Y222Imfvfx4M1tBjmaNuL4kekR689QTIQ53YE6eT-jU/edit" };
-    let lastData = null;
-    const statusEl = document.querySelector("#status");
-    const loadButton = document.querySelector("#load-report");
-    const csvButton = document.querySelector("#download-csv");
-    loadButton.addEventListener("click", loadReport);
-    csvButton.addEventListener("click", downloadCsv);
-
-    function loadReport() {
-      const code = document.querySelector("#team-code").value.trim();
-      if (!CONFIG.appsScriptUrl) { statusEl.textContent = "Configuracao pendente: informe a URL do Apps Script no arquivo responsaveis.html."; return; }
-      if (!code) { statusEl.textContent = "Informe o codigo da equipe."; return; }
-      statusEl.textContent = "Carregando...";
-      const callbackName = "partilharReportCallback_" + Date.now();
-      const script = document.createElement("script");
-      const params = new URLSearchParams({ route: "summary", codigoEquipe: code, callback: callbackName });
-      window[callbackName] = (data) => {
-        delete window[callbackName]; script.remove();
-        if (!data.ok) { statusEl.textContent = data.error || "Nao foi possivel carregar o relatorio."; return; }
-        lastData = data; renderReport(data); csvButton.disabled = false;
-        statusEl.textContent = "Relatorio atualizado em " + new Date(data.updatedAt).toLocaleString("pt-BR");
-      };
-      script.onerror = () => { delete window[callbackName]; script.remove(); statusEl.textContent = "Falha ao conectar com o Apps Script."; };
-      script.src = CONFIG.appsScriptUrl + "?" + params.toString();
-      document.body.appendChild(script);
-    }
-
-    function renderReport(data) {
-      document.querySelector("#dashboard").hidden = false;
-      document.querySelector("#charts-section").hidden = false;
-      document.querySelector("#recent-section").hidden = false;
-      renderKpis(data.totals);
-      renderCountTable("#donation-types", data.charts.donationTypes);
-      renderCountTable("#volunteer-areas", data.charts.volunteerAreas);
-      renderCountTable("#movement-types", data.charts.movementTypes);
-      renderCountTable("#top-products", data.charts.topProducts);
-      renderObjectTable("#recent-donations", data.recent.donations, ["Criado em", "Nome", "Item", "Quantidade", "Status"]);
-      renderObjectTable("#recent-volunteers", data.recent.volunteers, ["Criado em", "Nome", "Sabado", "Area", "Status"]);
-      renderObjectTable("#recent-movements", data.recent.movements, ["Data", "Tipo", "Produto", "Quantidade", "Tarefa/origem/destino"]);
-      renderObjectTable("#recent-contacts", data.recent.contacts, ["Criado em", "Nome", "Assunto", "Status"]);
-    }
-
-    function renderKpis(totals) {
-      const items = [["Doacoes", totals.donations], ["Voluntarios", totals.volunteers], ["Contatos", totals.contacts], ["Movimentacoes", totals.movements], ["Entradas", totals.entries], ["Saidas", totals.exits], ["Presencas", totals.attendance], ["Registros totais", totals.donations + totals.volunteers + totals.contacts + totals.movements]];
-      document.querySelector("#kpis").innerHTML = items.map(([label, value]) => `<div class="kpi"><small>${escapeHtml(label)}</small><strong>${Number(value || 0)}</strong></div>`).join("");
-    }
-
-    function renderCountTable(selector, rows) {
-      const body = rows.length ? rows.map((row) => `<tr><td>${escapeHtml(row.name)}</td><td>${row.value}</td></tr>`).join("") : `<tr><td colspan="2">Sem dados.</td></tr>`;
-      document.querySelector(selector).innerHTML = `<thead><tr><th>Item</th><th>Total</th></tr></thead><tbody>${body}</tbody>`;
-    }
-
-    function renderObjectTable(selector, rows, columns) {
-      const head = columns.map((col) => `<th>${escapeHtml(col)}</th>`).join("");
-      const body = rows.length ? rows.map((row) => `<tr>${columns.map((col) => `<td>${escapeHtml(row[col] || "")}</td>`).join("")}</tr>`).join("") : `<tr><td colspan="${columns.length}">Sem dados.</td></tr>`;
-      document.querySelector(selector).innerHTML = `<thead><tr>${head}</tr></thead><tbody>${body}</tbody>`;
-    }
-
-    function downloadCsv() {
-      if (!lastData) return;
-      const rows = [["Indicador", "Valor"], ["Doacoes", lastData.totals.donations], ["Voluntarios", lastData.totals.volunteers], ["Contatos", lastData.totals.contacts], ["Movimentacoes", lastData.totals.movements], ["Entradas", lastData.totals.entries], ["Saidas", lastData.totals.exits], ["Presencas", lastData.totals.attendance]];
-      const csv = rows.map((row) => row.map(csvCell).join(",")).join("\n");
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url; link.download = "relatorio-partilhar.csv"; link.click(); URL.revokeObjectURL(url);
-    }
-
-    function csvCell(value) { return `"${String(value ?? "").replace(/"/g, '""')}"`; }
-    function escapeHtml(value) { return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#039;"); }
+    const CONFIG={appsScriptUrl:"https://script.google.com/a/macros/duopivot.com/s/AKfycbz-zwOelppfATIGaU8mshUeK9nhcrI_6pWjNvrafKAaEI3gMDg-yT8XODEJM3L6xH2z/exec",sheetUrl:"https://docs.google.com/spreadsheets/d/1Y222Imfvfx4M1tBjmaNuL4kekR689QTIQ53YE6eT-jU/edit"};let lastData=null;const statusEl=document.querySelector("#status"),loadButton=document.querySelector("#load-report"),csvButton=document.querySelector("#download-csv");loadButton.addEventListener("click",loadReport);csvButton.addEventListener("click",downloadCsv);
+    function loadReport(){const code=document.querySelector("#team-code").value.trim();if(!code){statusEl.textContent="Informe o codigo da equipe.";return}statusEl.textContent="Carregando...";const callbackName="partilharReportCallback_"+Date.now(),script=document.createElement("script"),params=new URLSearchParams({route:"summary",codigoEquipe:code,callback:callbackName});window[callbackName]=(data)=>{delete window[callbackName];script.remove();if(!data.ok){statusEl.textContent=data.error||"Nao foi possivel carregar o relatorio.";return}lastData=data;renderReport(data);csvButton.disabled=false;statusEl.textContent="Relatorio atualizado em "+new Date(data.updatedAt).toLocaleString("pt-BR")};script.onerror=()=>{delete window[callbackName];script.remove();statusEl.textContent="Falha ao conectar com o Apps Script."};script.src=CONFIG.appsScriptUrl+"?"+params.toString();document.body.appendChild(script)}
+    function renderReport(data){document.querySelector("#dashboard").hidden=false;document.querySelector("#charts-section").hidden=false;document.querySelector("#recent-section").hidden=false;renderKpis(data.totals);renderCountTable("#donation-types",data.charts.donationTypes);renderCountTable("#volunteer-areas",data.charts.volunteerAreas);renderCountTable("#movement-types",data.charts.movementTypes);renderCountTable("#top-products",data.charts.topProducts);renderObjectTable("#recent-donations",data.recent.donations,["Criado em","Nome","Item","Quantidade","Status"]);renderObjectTable("#recent-volunteers",data.recent.volunteers,["Criado em","Nome","Sabado","Area","Status"]);renderObjectTable("#recent-movements",data.recent.movements,["Data","Tipo","Produto","Quantidade","Tarefa/origem/destino"]);renderObjectTable("#recent-contacts",data.recent.contacts,["Criado em","Nome","Assunto","Status"])}
+    function renderKpis(totals){const items=[["Doacoes",totals.donations],["Voluntarios",totals.volunteers],["Contatos",totals.contacts],["Movimentacoes",totals.movements],["Entradas",totals.entries],["Saidas",totals.exits],["Presencas",totals.attendance],["Registros totais",totals.donations+totals.volunteers+totals.contacts+totals.movements]];document.querySelector("#kpis").innerHTML=items.map(([label,value])=>`<div class="kpi"><small>${escapeHtml(label)}</small><strong>${Number(value||0)}</strong></div>`).join("")}
+    function renderCountTable(selector,rows){const body=rows.length?rows.map((row)=>`<tr><td>${escapeHtml(row.name)}</td><td>${row.value}</td></tr>`).join(""):`<tr><td colspan="2">Sem dados.</td></tr>`;document.querySelector(selector).innerHTML=`<thead><tr><th>Item</th><th>Total</th></tr></thead><tbody>${body}</tbody>`}
+    function renderObjectTable(selector,rows,columns){const head=columns.map((col)=>`<th>${escapeHtml(col)}</th>`).join(""),body=rows.length?rows.map((row)=>`<tr>${columns.map((col)=>`<td>${escapeHtml(row[col]||"")}</td>`).join("")}</tr>`).join(""):`<tr><td colspan="${columns.length}">Sem dados.</td></tr>`;document.querySelector(selector).innerHTML=`<thead><tr>${head}</tr></thead><tbody>${body}</tbody>`}
+    function downloadCsv(){if(!lastData)return;const rows=[["Indicador","Valor"],["Doacoes",lastData.totals.donations],["Voluntarios",lastData.totals.volunteers],["Contatos",lastData.totals.contacts],["Movimentacoes",lastData.totals.movements],["Entradas",lastData.totals.entries],["Saidas",lastData.totals.exits],["Presencas",lastData.totals.attendance]],csv=rows.map((row)=>row.map(csvCell).join(",")).join("\n"),blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download="relatorio-partilhar.csv";link.click();URL.revokeObjectURL(url)}
+    function csvCell(value){return`"${String(value??"").replace(/"/g,'""')}"`}function escapeHtml(value){return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
   </script>
 </body>
 </html>
