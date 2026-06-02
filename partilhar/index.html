@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partilhar - Central de Apoio</title>
+  <meta name="description" content="Central de apoio da Partilhar para doacoes, voluntariado e organizacao das acoes.">
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --ink: #1f2a2e;
+      --muted: #657277;
+      --line: #d9ded8;
+      --brand: #1f6f5b;
+      --brand-dark: #124938;
+      --accent: #cc6b3c;
+      --focus: #f0b86d;
+      --shadow: 0 18px 50px rgba(31, 42, 46, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px clamp(18px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1, h2 { margin: 0; }
+    h1 { font-size: clamp(1.35rem, 3vw, 2rem); }
+    h2 { font-size: clamp(1.7rem, 4vw, 3rem); line-height: 1.08; }
+    p { line-height: 1.6; }
+
+    a { color: var(--brand-dark); font-weight: 700; }
+
+    .topbar-link, .ghost-button, .submit-button {
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid var(--brand);
+      padding: 10px 16px;
+      text-decoration: none;
+    }
+
+    .topbar-link, .submit-button {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 52px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      gap: clamp(24px, 6vw, 64px);
+      align-items: start;
+      padding: clamp(18px, 5vw, 48px) 0 28px;
+    }
+
+    .hero-copy p {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .action-card {
+      display: flex;
+      min-height: 156px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      color: var(--ink);
+      cursor: pointer;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .action-card:hover, .action-card:focus-visible {
+      border-color: var(--brand);
+      transform: translateY(-2px);
+    }
+
+    .action-card span { font-size: 1.2rem; font-weight: 850; }
+    .action-card small { color: var(--muted); font-size: 0.94rem; line-height: 1.45; }
+    .action-card.muted { border-color: #e2d0bf; }
+
+    .panel {
+      margin-top: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 4vw, 32px);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .ghost-button { background: #fff; color: var(--brand-dark); cursor: pointer; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    label { color: var(--ink); font-size: 0.9rem; font-weight: 780; }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 12px;
+    }
+
+    textarea { min-height: 96px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus, button:focus-visible, a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .submit-button {
+      margin-top: 18px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 850;
+    }
+
+    .submit-button:disabled { cursor: wait; opacity: 0.7; }
+    .status { min-height: 24px; margin: 16px 0 0; color: var(--brand-dark); font-weight: 750; }
+
+    .internal-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .internal-links a {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.62);
+      padding: 10px 14px;
+      text-decoration: none;
+    }
+
+    footer { border-top: 1px solid var(--line); color: var(--muted); padding: 20px clamp(18px, 5vw, 72px); }
+
+    @media (max-width: 780px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .hero { grid-template-columns: 1fr; }
+      .actions-grid, .form-grid { grid-template-columns: 1fr; }
+      .action-card { min-height: 132px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Partilhar</p>
+      <h1>Central de apoio</h1>
+    </div>
+    <a class="topbar-link" data-link="whatsapp" href="#">WhatsApp</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <h2>Escolha como voce quer ajudar</h2>
+        <p>Um caminho simples para registrar doacoes, voluntariado e contatos com a equipe.</p>
+      </div>
+
+      <div class="actions-grid" aria-label="Opcoes principais">
+        <button class="action-card" data-open="donation">
+          <span>Doar alimentos ou itens</span>
+          <small>Registre o que voce pretende doar.</small>
+        </button>
+        <button class="action-card" data-open="volunteer">
+          <span>Ser voluntario</span>
+          <small>Informe sua disponibilidade para ajudar.</small>
+        </button>
+        <button class="action-card" data-open="contact">
+          <span>Falar com a equipe</span>
+          <small>Envie uma mensagem para retorno.</small>
+        </button>
+        <button class="action-card muted" data-open="team">
+          <span>Area da equipe</span>
+          <small>Lancamentos rapidos e links internos.</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="panel" id="form-panel" hidden>
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow" id="panel-kicker">Cadastro</p>
+          <h2 id="panel-title">Formulario</h2>
+        </div>
+        <button class="ghost-button" id="close-panel" type="button">Fechar</button>
+      </div>
+
+      <form class="form" id="dynamic-form">
+        <div id="form-fields"></div>
+        <p class="status" id="form-status" role="status"></p>
+        <button class="submit-button" type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <section class="internal-links" aria-label="Links internos">
+      <a data-link="sheet" href="#">Planilha</a>
+      <a data-link="looker" href="#">Dashboard</a>
+      <a data-link="whatsapp" href="#">WhatsApp</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Projeto academico de apoio a mobilizacao solidaria e gestao de doacoes.</p>
+  </footer>
+
+  <script>
+    const PARTILHAR_CONFIG = {
+      appsScriptUrl: "",
+      sheetUrl: "https://docs.google.com/spreadsheets/d/1Y222Imfvfx4M1tBjmaNuL4kekR689QTIQ53YE6eT-jU/edit",
+      lookerUrl: "",
+      whatsappUrl: "https://wa.me/"
+    };
+
+    const formDefinitions = {
+      donation: {
+        title: "Registrar intencao de doacao",
+        kicker: "Doacoes",
+        route: "donation",
+        fields: [
+          ["nome", "Nome", "text", true],
+          ["telefone", "Telefone/WhatsApp", "tel", true],
+          ["tipoDoacao", "Tipo de doacao", "select", true, ["Alimentos", "Descartaveis", "Material de limpeza", "Equipamento", "Outro"]],
+          ["item", "Item", "text", true],
+          ["quantidade", "Quantidade aproximada", "text", false],
+          ["dataPrevista", "Data prevista", "date", false],
+          ["observacao", "Observacao", "textarea", false]
+        ]
+      },
+      volunteer: {
+        title: "Registrar interesse em voluntariado",
+        kicker: "Voluntariado",
+        route: "volunteer",
+        fields: [
+          ["nome", "Nome", "text", true],
+          ["telefone", "Telefone/WhatsApp", "tel", true],
+          ["sabado", "Sabado disponivel", "date", false],
+          ["area", "Como deseja ajudar", "select", true, ["Cozinha", "Entrega", "Organizacao", "Limpeza", "Divulgacao", "Onde precisar"]],
+          ["periodo", "Disponibilidade", "select", false, ["Manha", "Tarde", "Dia todo", "A combinar"]],
+          ["observacao", "Observacao", "textarea", false]
+        ]
+      },
+      contact: {
+        title: "Falar com a equipe",
+        kicker: "Contato",
+        route: "contact",
+        fields: [
+          ["nome", "Nome", "text", true],
+          ["telefone", "Telefone/WhatsApp", "tel", true],
+          ["assunto", "Assunto", "select", true, ["Doacao", "Voluntariado", "Beneficiario", "Parceria", "Outro"]],
+          ["mensagem", "Mensagem", "textarea", true]
+        ]
+      },
+      team: {
+        title: "Lancamento rapido da equipe",
+        kicker: "Equipe",
+        route: "movement",
+        fields: [
+          ["codigoEquipe", "Codigo da equipe", "password", true],
+          ["tipoMovimento", "Tipo", "select", true, ["Entrada", "Saida", "Acerto"]],
+          ["data", "Data", "date", true],
+          ["tarefa", "Tarefa/origem/destino", "text", true],
+          ["produto", "Produto", "text", true],
+          ["quantidade", "Quantidade", "number", true],
+          ["unidade", "Unidade", "text", false],
+          ["observacao", "Observacao", "textarea", false]
+        ]
+      }
+    };
+
+    const panel = document.querySelector("#form-panel");
+    const panelTitle = document.querySelector("#panel-title");
+    const panelKicker = document.querySelector("#panel-kicker");
+    const form = document.querySelector("#dynamic-form");
+    const fieldsContainer = document.querySelector("#form-fields");
+    const statusEl = document.querySelector("#form-status");
+    const closePanel = document.querySelector("#close-panel");
+    let activeDefinition = null;
+
+    document.querySelectorAll("[data-open]").forEach((button) => {
+      button.addEventListener("click", () => openForm(button.dataset.open));
+    });
+
+    document.querySelectorAll("[data-link]").forEach((link) => {
+      const key = `${link.dataset.link}Url`;
+      const url = PARTILHAR_CONFIG[key];
+      if (url) {
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener";
+      } else {
+        link.href = "#";
+        link.addEventListener("click", (event) => event.preventDefault());
+      }
+    });
+
+    closePanel.addEventListener("click", () => {
+      panel.hidden = true;
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!activeDefinition) return;
+
+      const submitButton = form.querySelector("button[type='submit']");
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      payload.route = activeDefinition.route;
+      payload.createdAt = new Date().toISOString();
+
+      if (!PARTILHAR_CONFIG.appsScriptUrl) {
+        statusEl.textContent = "Configuracao pendente: informe a URL do Apps Script.";
+        return;
+      }
+
+      submitButton.disabled = true;
+      statusEl.textContent = "Enviando...";
+
+      try {
+        await fetch(PARTILHAR_CONFIG.appsScriptUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        form.reset();
+        statusEl.textContent = "Registro enviado. A equipe vai acompanhar pela planilha.";
+      } catch (error) {
+        statusEl.textContent = "Nao foi possivel enviar agora. Tente novamente pelo WhatsApp.";
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    function openForm(key) {
+      const definition = formDefinitions[key];
+      if (!definition) return;
+
+      activeDefinition = definition;
+      panelTitle.textContent = definition.title;
+      panelKicker.textContent = definition.kicker;
+      fieldsContainer.innerHTML = renderFields(definition.fields);
+      statusEl.textContent = "";
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function renderFields(fields) {
+      const html = fields.map(([name, label, type, required, options]) => {
+        const requiredAttr = required ? "required" : "";
+        const fullClass = type === "textarea" ? " full" : "";
+
+        if (type === "select") {
+          return `<div class="field${fullClass}"><label for="${name}">${label}</label><select id="${name}" name="${name}" ${requiredAttr}><option value="">Selecione</option>${options.map((option) => `<option value="${option}">${option}</option>`).join("")}</select></div>`;
+        }
+
+        if (type === "textarea") {
+          return `<div class="field full"><label for="${name}">${label}</label><textarea id="${name}" name="${name}" ${requiredAttr}></textarea></div>`;
+        }
+
+        return `<div class="field${fullClass}"><label for="${name}">${label}</label><input id="${name}" name="${name}" type="${type}" ${requiredAttr}></div>`;
+      }).join("");
+
+      return `<div class="form-grid">${html}</div>`;
+    }
+  </script>
+</body>
+</html>
