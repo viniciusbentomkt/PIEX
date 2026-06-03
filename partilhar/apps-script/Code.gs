@@ -8,6 +8,11 @@ const SHEETS = {
   movement: "SITE_MOVIMENTACOES",
   attendance: "SITE_PRESENCA",
   config: "SITE_CONFIG",
+  legacyEntries: "ENTRADAS",
+  legacyExits: "SA\u00cdDAS",
+  legacyMeals: "FICHA T\u00c9CNICA - MARMITAS",
+  legacyDiary: "DI\u00c1RIO",
+  legacyStock: "ESTOQUE",
 };
 
 const HEADERS = {
@@ -25,8 +30,7 @@ function doGet(e) {
   if (route === "summary") {
     try {
       requireTeamCode(params.codigoEquipe);
-      const data = buildResponsibleSummary(params);
-      return scriptResponse(data, params.callback);
+      return scriptResponse(buildResponsibleSummary(params), params.callback);
     } catch (error) {
       return scriptResponse({ ok: false, error: error.message }, params.callback);
     }
@@ -38,34 +42,28 @@ function doPost(e) {
   try {
     const payload = parsePayload(e);
     const route = String(payload.route || "").trim();
-
     if (route === "donation") {
       appendRow(SHEETS.donation, [nowIso(), payload.nome, payload.telefone, payload.tipoDoacao, payload.item, payload.quantidade, payload.dataPrevista, payload.observacao, "Prometida"]);
       return jsonResponse({ ok: true, route });
     }
-
     if (route === "volunteer") {
       appendRow(SHEETS.volunteer, [nowIso(), payload.nome, payload.telefone, payload.sabado, payload.area, payload.periodo, payload.observacao, "Novo interesse"]);
       return jsonResponse({ ok: true, route });
     }
-
     if (route === "contact") {
       appendRow(SHEETS.contact, [nowIso(), payload.nome, payload.telefone, payload.assunto, payload.mensagem, "Novo"]);
       return jsonResponse({ ok: true, route });
     }
-
     if (route === "movement") {
       requireTeamCode(payload.codigoEquipe);
       appendRow(SHEETS.movement, [nowIso(), payload.data, payload.tipoMovimento, payload.tarefa, payload.produto, Number(payload.quantidade || 0), payload.unidade, payload.observacao]);
       return jsonResponse({ ok: true, route });
     }
-
     if (route === "attendance") {
       requireTeamCode(payload.codigoEquipe);
       appendRow(SHEETS.attendance, [nowIso(), payload.data, payload.nome, payload.telefone, payload.confirmado, payload.compareceu, payload.observacao]);
       return jsonResponse({ ok: true, route });
     }
-
     return jsonResponse({ ok: false, error: "Rota invalida" });
   } catch (error) {
     return jsonResponse({ ok: false, error: error.message });
@@ -82,27 +80,12 @@ function setupPartilhar() {
       sheet.getRange(1, 1, 1, header.length).setFontWeight("bold");
     }
   });
-
   const config = getOrCreateSheet(SHEETS.config);
   if (config.getLastRow() < 2) {
     config.appendRow(["ESTOQUE_MINIMO_PADRAO", "5"]);
     config.appendRow(["STATUS_DOACAO_PADRAO", "Prometida"]);
     config.appendRow(["STATUS_VOLUNTARIO_PADRAO", "Novo interesse"]);
   }
-}
-
-function gerarResumoSemanal() {
-  const ss = getSpreadsheet();
-  const resumo = getOrCreateSheet("SITE_RESUMO_SEMANAL");
-  resumo.clear();
-  resumo.appendRow(["Indicador", "Valor"]);
-  resumo.appendRow(["Doacoes registradas", countRows(SHEETS.donation)]);
-  resumo.appendRow(["Voluntarios registrados", countRows(SHEETS.volunteer)]);
-  resumo.appendRow(["Contatos registrados", countRows(SHEETS.contact)]);
-  resumo.appendRow(["Movimentacoes de estoque", countRows(SHEETS.movement)]);
-  resumo.getRange(1, 1, 1, 2).setFontWeight("bold");
-  SpreadsheetApp.flush();
-  return ss.getUrl();
 }
 
 function buildResponsibleSummary(params) {
@@ -112,16 +95,79 @@ function buildResponsibleSummary(params) {
   const contacts = filterRowsByPeriod(getSheetObjects(SHEETS.contact), period, ["Criado em"]);
   const movements = filterRowsByPeriod(getSheetObjects(SHEETS.movement), period, ["Data", "Criado em"]);
   const attendance = filterRowsByPeriod(getSheetObjects(SHEETS.attendance), period, ["Data", "Criado em"]);
+  const legacyEntries = filterRowsByPeriod(getSheetObjects(SHEETS.legacyEntries), period, ["DATA"]);
+  const legacyExits = filterRowsByPeriod(getSheetObjects(SHEETS.legacyExits), period, ["DATA"]);
+  const legacyMeals = filterRowsByPeriod(getSheetObjects(SHEETS.legacyMeals), period, ["DATA"]);
+  const legacyDiary = filterRowsByPeriod(getSheetObjects(SHEETS.legacyDiary), period, ["DATA", "Data"]);
+  const stockRows = getSheetObjects(SHEETS.legacyStock);
   const entries = movements.filter((row) => String(row["Tipo"] || "").toLowerCase() === "entrada");
   const exits = movements.filter((row) => String(row["Tipo"] || "").toLowerCase() === "saida");
-
+  const normalizedLegacyEntries = legacyEntries.map((row) => normalizeLegacyMovement(row, "Entrada historica"));
+  const normalizedLegacyExits = legacyExits.map((row) => normalizeLegacyMovement(row, "Saida historica"));
+  const normalizedSiteMovements = movements.map(normalizeSiteMovement);
+  const allMovements = normalizedSiteMovements.concat(normalizedLegacyEntries, normalizedLegacyExits);
+  const allDonations = donations.concat(normalizedLegacyEntries.map((row) => ({
+    "Criado em": row["Data"],
+    "Nome": row["Tarefa/origem/destino"],
+    "Item": row["Produto"],
+    "Quantidade": row["Quantidade"],
+    "Status": row["Tipo"],
+  })));
   return {
     ok: true,
     updatedAt: nowIso(),
     period: { dateFrom: period.dateFromText, dateTo: period.dateToText },
-    totals: { donations: donations.length, volunteers: volunteers.length, contacts: contacts.length, movements: movements.length, entries: entries.length, exits: exits.length, attendance: attendance.length },
-    recent: { donations: donations.slice(-8).reverse(), volunteers: volunteers.slice(-8).reverse(), movements: movements.slice(-8).reverse(), contacts: contacts.slice(-8).reverse() },
-    charts: { donationTypes: countBy(donations, "Tipo de doacao"), volunteerAreas: countBy(volunteers, "Area"), movementTypes: countBy(movements, "Tipo"), topProducts: countBy(movements, "Produto").slice(0, 10) },
+    totals: {
+      donations: allDonations.length,
+      volunteers: volunteers.length,
+      contacts: contacts.length,
+      movements: allMovements.length,
+      entries: entries.length + legacyEntries.length,
+      exits: exits.length + legacyExits.length,
+      attendance: attendance.length,
+      meals: legacyMeals.filter((row) => row["DATA"]).length,
+      diary: legacyDiary.length,
+      stockItems: stockRows.length,
+    },
+    recent: {
+      donations: allDonations.slice(-8).reverse(),
+      volunteers: volunteers.slice(-8).reverse(),
+      movements: allMovements.slice(-8).reverse(),
+      contacts: contacts.slice(-8).reverse(),
+    },
+    charts: {
+      donationTypes: countBy(allDonations, "Status"),
+      volunteerAreas: countBy(volunteers, "Area"),
+      movementTypes: countBy(allMovements, "Tipo"),
+      topProducts: countBy(allMovements, "Produto").slice(0, 10),
+      legacyTasks: countBy(allMovements, "Tarefa/origem/destino").slice(0, 10),
+    },
+  };
+}
+
+function normalizeSiteMovement(row) {
+  return {
+    "Criado em": row["Criado em"] || "",
+    "Data": row["Data"] || row["Criado em"] || "",
+    "Tipo": row["Tipo"] || "",
+    "Tarefa/origem/destino": row["Tarefa/origem/destino"] || "",
+    "Produto": row["Produto"] || "",
+    "Quantidade": row["Quantidade"] || "",
+    "Unidade": row["Unidade"] || "",
+    "Observacao": row["Observacao"] || "",
+  };
+}
+
+function normalizeLegacyMovement(row, typeName) {
+  return {
+    "Criado em": row["DATA"] || "",
+    "Data": row["DATA"] || "",
+    "Tipo": typeName,
+    "Tarefa/origem/destino": row["TAREFAS"] || "",
+    "Produto": row["PRODUTOS"] || "",
+    "Quantidade": row["QTD PROD"] || "",
+    "Unidade": row["UN MEDIDA"] || "",
+    "Observacao": row["ITENS"] || "",
   };
 }
 
