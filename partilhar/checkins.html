@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partilhar - Check-in</title>
+  <style>
+    :root { --bg:#f7f4ef; --surface:#fff; --ink:#1f2a2e; --muted:#657277; --line:#d9ded8; --brand:#1f6f5b; --brand-dark:#124938; --focus:#f0b86d; --shadow:0 14px 40px rgba(31,42,46,.1); }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:var(--bg); color:var(--ink); font-family:Arial, Helvetica, sans-serif; }
+    header { display:flex; justify-content:space-between; gap:18px; align-items:center; padding:22px clamp(18px,5vw,72px); background:rgba(255,255,255,.76); border-bottom:1px solid var(--line); }
+    main { width:min(980px, calc(100% - 32px)); margin:0 auto; padding:32px 0 54px; }
+    h1,h2,h3,p { margin-top:0; } p { color:var(--muted); line-height:1.55; } a { color:var(--brand-dark); font-weight:700; }
+    .section { border:1px solid var(--line); border-radius:8px; background:var(--surface); box-shadow:var(--shadow); padding:clamp(18px,4vw,28px); margin-bottom:20px; }
+    .form-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; } .wide { grid-column:1 / -1; }
+    label { display:grid; gap:7px; font-weight:780; } input,select,textarea { min-height:46px; border:1px solid var(--line); border-radius:8px; padding:10px 12px; font:inherit; } textarea { min-height:96px; resize:vertical; }
+    button { min-height:46px; border:0; border-radius:8px; background:var(--brand); color:#fff; cursor:pointer; font-weight:850; padding:10px 16px; }
+    input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+    .status { min-height:24px; color:var(--brand-dark); font-weight:750; margin:12px 0 0; } .tables { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    table { width:100%; border-collapse:collapse; font-size:.92rem; } th,td { border-bottom:1px solid var(--line); padding:10px 8px; text-align:left; vertical-align:top; } th { color:var(--brand-dark); font-size:.78rem; text-transform:uppercase; }
+    @media (max-width:800px) { header { align-items:flex-start; flex-direction:column; } .form-grid,.tables { grid-template-columns:1fr; } .wide { grid-column:auto; } }
+  </style>
+</head>
+<body>
+<header><div><h1>Check-in do sabado</h1><p>Conferir voluntarios e registrar presenca sem abrir o painel completo.</p></div><a href="./responsaveis.html">Voltar para responsaveis</a></header>
+<main>
+<section class="section"><h2>Carregar dia</h2><div class="form-grid"><label>Codigo da equipe <input id="team-code" type="password" autocomplete="current-password"></label><label>Data <input id="checkin-date" type="date"></label><button id="load-checkin" type="button">Carregar check-in</button></div><p class="status" id="checkin-status">Informe o codigo e a data do sabado.</p></section>
+<section class="section"><h2>Lancar presenca</h2><div class="form-grid"><label>Nome <input id="attendance-name" type="text" autocomplete="name"></label><label>Telefone <input id="attendance-phone" type="tel" autocomplete="tel"></label><label>Confirmado<select id="attendance-confirmed"><option value="Sim">Sim</option><option value="Nao">Nao</option><option value="Pendente">Pendente</option></select></label><label>Compareceu<select id="attendance-present"><option value="Sim">Sim</option><option value="Nao">Nao</option></select></label><label class="wide">Observacao <textarea id="attendance-note"></textarea></label><button id="save-attendance" type="button">Salvar presenca</button></div></section>
+<section class="section"><h2>Lista do dia</h2><div class="tables"><div><h3>Voluntarios</h3><table id="checkin-volunteers"></table></div><div><h3>Presencas lancadas</h3><table id="checkin-attendance"></table></div></div></section>
+</main>
+<script>
+const CONFIG={appsScriptUrl:"https://script.google.com/macros/s/AKfycby9SKUJbkoiH9BIjG5J_lsvuMCfnzZYkqTWW3ZK551vIHvU6ZJ4g1-CT-j1syMRdxbS/exec"},statusEl=document.querySelector("#checkin-status");
+document.querySelector("#load-checkin").addEventListener("click",loadCheckin);document.querySelector("#save-attendance").addEventListener("click",saveAttendance);document.querySelector("#team-code").addEventListener("input",saveAccess);document.querySelector("#checkin-date").addEventListener("change",saveAccess);restoreAccess();
+function loadCheckin(){const code=getCode(),date=document.querySelector("#checkin-date").value;if(!code||!date){statusEl.textContent="Informe codigo e data.";return}saveAccess();statusEl.textContent="Carregando...";callScript({route:"checkin",codigoEquipe:code,date},data=>{if(!data.ok){statusEl.textContent=data.error||"Nao foi possivel carregar.";return}renderObjectTable("#checkin-volunteers",data.volunteers||[],["Criado em","Nome","Telefone","Sabado","Area","Status"]);renderObjectTable("#checkin-attendance",data.attendance||[],["Data","Nome","Telefone","Confirmado","Compareceu","Observacao"]);statusEl.textContent=`Voluntarios: ${data.totals.volunteers} | Presencas: ${data.totals.attendance} | Compareceram: ${data.totals.present} | Faltas: ${data.totals.absent}`},()=>statusEl.textContent="Falha ao conectar.")}
+async function saveAttendance(){const payload={route:"attendance",codigoEquipe:getCode(),data:document.querySelector("#checkin-date").value,nome:document.querySelector("#attendance-name").value.trim(),telefone:document.querySelector("#attendance-phone").value.trim(),confirmado:document.querySelector("#attendance-confirmed").value,compareceu:document.querySelector("#attendance-present").value,observacao:document.querySelector("#attendance-note").value.trim()};if(!payload.codigoEquipe||!payload.data||!payload.nome){statusEl.textContent="Informe codigo, data e nome.";return}statusEl.textContent="Salvando...";try{await fetch(CONFIG.appsScriptUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});["#attendance-name","#attendance-phone","#attendance-note"].forEach(s=>document.querySelector(s).value="");statusEl.textContent="Presenca enviada. Recarregando...";setTimeout(loadCheckin,900)}catch(e){statusEl.textContent="Nao foi possivel salvar."}}
+function callScript(obj,ok,err){const cb="partilharCheckin_"+Date.now()+"_"+Math.floor(Math.random()*10000),script=document.createElement("script"),params=new URLSearchParams({...obj,callback:cb});window[cb]=data=>{delete window[cb];script.remove();ok(data)};script.onerror=()=>{delete window[cb];script.remove();if(err)err()};script.src=CONFIG.appsScriptUrl+"?"+params.toString();document.body.appendChild(script)}
+function renderObjectTable(sel,rows,cols){document.querySelector(sel).innerHTML=`<thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${cols.map(c=>`<td>${esc(r[c]||"")}</td>`).join("")}</tr>`).join(""):`<tr><td colspan="${cols.length}">Sem dados.</td></tr>`}</tbody>`}
+function getCode(){return document.querySelector("#team-code").value.trim()}function saveAccess(){localStorage.setItem("partilharTeamCode",getCode());localStorage.setItem("partilharCheckinDate",document.querySelector("#checkin-date").value)}function restoreAccess(){document.querySelector("#team-code").value=localStorage.getItem("partilharTeamCode")||"";document.querySelector("#checkin-date").value=localStorage.getItem("partilharCheckinDate")||new Date().toISOString().slice(0,10)}function esc(v){return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+</script>
+</body>
+</html>
