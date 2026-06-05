@@ -16,6 +16,8 @@ const SHEETS = {
   products: "PRODUTOS",
   donors: "ANJOS DOADORES",
   monthlyDonation: "DOA\u00c7\u00c3O MENSAL",
+  items: "ITENS",
+  tasks: "TAREFAS",
 };
 
 const HEADERS = {
@@ -91,6 +93,16 @@ function doGet(e) {
     try {
       requireTeamCode(params.codigoEquipe);
       const data = buildTextReport(params);
+      return scriptResponse(data, params.callback);
+    } catch (error) {
+      return scriptResponse({ ok: false, error: error.message }, params.callback);
+    }
+  }
+
+  if (route === "catalog") {
+    try {
+      requireTeamCode(params.codigoEquipe);
+      const data = buildCatalog();
       return scriptResponse(data, params.callback);
     } catch (error) {
       return scriptResponse({ ok: false, error: error.message }, params.callback);
@@ -409,6 +421,29 @@ function buildTextReport(params) {
   };
 }
 
+function buildCatalog() {
+  const products = getSheetObjects(SHEETS.products)
+    .map((row) => ({
+      produto: String(row["PRODUTO"] || row["Produto"] || "").trim().toUpperCase(),
+      unidade: String(row["UN MEDIDA"] || row["Unidade"] || "").trim().toUpperCase(),
+      item: String(row["ITEM"] || row["Item"] || "").trim().toUpperCase(),
+    }))
+    .filter((row) => row.produto);
+  const items = uniqueValues(getSheetObjects(SHEETS.items), ["ITEM", "Item"]);
+  const tasks = uniqueValues(getSheetObjects(SHEETS.tasks), ["TAREFAS", "Tarefas"]);
+  const donors = uniqueValues(getSheetObjects(SHEETS.donors), ["DOADOR", "Doador"]);
+
+  return {
+    ok: true,
+    updatedAt: nowIso(),
+    products: products,
+    productNames: uniqueStrings(products.map((row) => row.produto)),
+    categories: uniqueStrings(products.map((row) => row.item).concat(items)),
+    tasks: tasks,
+    donors: donors,
+  };
+}
+
 function buildLowStock(stockRows, limit) {
   const safeLimit = isNaN(limit) || limit < 0 ? 5 : limit;
   return stockRows
@@ -536,6 +571,33 @@ function countBy(rows, fieldName) {
   return Object.keys(counts)
     .map((name) => ({ name: name, value: counts[name] }))
     .sort((a, b) => b.value - a.value);
+}
+
+function uniqueValues(rows, fieldNames) {
+  const values = [];
+  rows.forEach((row) => {
+    for (let i = 0; i < fieldNames.length; i++) {
+      const value = String(row[fieldNames[i]] || "").trim().toUpperCase();
+      if (value) {
+        values.push(value);
+        break;
+      }
+    }
+  });
+  return uniqueStrings(values);
+}
+
+function uniqueStrings(values) {
+  const seen = {};
+  return values
+    .map((value) => String(value || "").trim().toUpperCase())
+    .filter((value) => value)
+    .filter((value) => {
+      if (seen[value]) return false;
+      seen[value] = true;
+      return true;
+    })
+    .sort();
 }
 
 function parseNumberPt(value) {
