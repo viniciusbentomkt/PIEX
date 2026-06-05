@@ -13,6 +13,9 @@ const SHEETS = {
   legacyMeals: "FICHA T\u00c9CNICA - MARMITAS",
   legacyDiary: "DI\u00c1RIO",
   legacyStock: "ESTOQUE",
+  products: "PRODUTOS",
+  donors: "ANJOS DOADORES",
+  monthlyDonation: "DOA\u00c7\u00c3O MENSAL",
 };
 
 const HEADERS = {
@@ -168,6 +171,69 @@ function doPost(e) {
         payload.confirmado,
         payload.compareceu,
         payload.observacao,
+      ]);
+      return jsonResponse({ ok: true, route });
+    }
+
+    if (route === "inventoryEntry") {
+      requireTeamCode(payload.codigoEquipe);
+      appendLegacyMovement(SHEETS.legacyEntries, payload);
+      appendRow(SHEETS.movement, [
+        nowIso(),
+        payload.data,
+        "entrada",
+        payload.origem || payload.tarefa,
+        payload.produto,
+        Number(payload.quantidade || 0),
+        payload.unidade,
+        payload.observacao,
+      ]);
+      return jsonResponse({ ok: true, route });
+    }
+
+    if (route === "inventoryExit") {
+      requireTeamCode(payload.codigoEquipe);
+      appendLegacyMovement(SHEETS.legacyExits, payload);
+      appendRow(SHEETS.movement, [
+        nowIso(),
+        payload.data,
+        "saida",
+        payload.destino || payload.tarefa,
+        payload.produto,
+        Number(payload.quantidade || 0),
+        payload.unidade,
+        payload.observacao,
+      ]);
+      return jsonResponse({ ok: true, route });
+    }
+
+    if (route === "monthlyDonation") {
+      requireTeamCode(payload.codigoEquipe);
+      appendMonthlyDonation(payload);
+      return jsonResponse({ ok: true, route });
+    }
+
+    if (route === "donor") {
+      requireTeamCode(payload.codigoEquipe);
+      appendRow(SHEETS.donors, [
+        payload.doador,
+        payload.item,
+        payload.contato,
+        payload.telefone,
+        payload.responsavel,
+        payload.cnpjCpf,
+        payload.email,
+        payload.endereco,
+      ]);
+      return jsonResponse({ ok: true, route });
+    }
+
+    if (route === "product") {
+      requireTeamCode(payload.codigoEquipe);
+      appendRow(SHEETS.products, [
+        String(payload.produto || "").toUpperCase(),
+        String(payload.unidade || "").toUpperCase(),
+        String(payload.item || "").toUpperCase(),
       ]);
       return jsonResponse({ ok: true, route });
     }
@@ -511,6 +577,37 @@ function appendRow(sheetName, values) {
     sheet.setFrozenRows(1);
   }
   sheet.appendRow(values.map((value) => value === undefined ? "" : value));
+}
+
+function appendLegacyMovement(sheetName, payload) {
+  const sheet = getOrCreateSheet(sheetName);
+  const nextRow = Math.max(sheet.getLastRow() + 1, 2);
+  const date = parseDateOnly(payload.data, false) || new Date();
+  const product = String(payload.produto || "").toUpperCase();
+  const task = payload.origem || payload.destino || payload.tarefa || "";
+  const quantity = parseNumberPt(payload.quantidade);
+  const unitFormula = `=IF(ISERROR(VLOOKUP(C${nextRow},PRODUTOS!A:B,2,0)),"",VLOOKUP(C${nextRow},PRODUTOS!A:B,2,0))`;
+  const itemFormula = `=IF(ISERROR(VLOOKUP(C${nextRow},PRODUTOS!A:C,3,0)),"",VLOOKUP(C${nextRow},PRODUTOS!A:C,3,0))`;
+  sheet.getRange(nextRow, 1, 1, 6).setValues([[
+    date,
+    task,
+    product,
+    unitFormula,
+    itemFormula,
+    quantity,
+  ]]);
+}
+
+function appendMonthlyDonation(payload) {
+  const sheet = getOrCreateSheet(SHEETS.monthlyDonation);
+  const nextRow = Math.max(sheet.getLastRow() + 1, 5);
+  const date = parseDateOnly(payload.data, false) || new Date();
+  sheet.getRange(nextRow, 1, 1, 4).setValues([[
+    payload.entidade || payload.doador || "",
+    String(payload.produto || "").toUpperCase(),
+    parseNumberPt(payload.quantidade),
+    date,
+  ]]);
 }
 
 function countRows(sheetName) {
