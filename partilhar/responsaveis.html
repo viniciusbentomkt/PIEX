@@ -246,6 +246,137 @@
       </div>
     </section>
 
+    <section class="section" id="launch-section">
+      <h2>Lancamentos na planilha</h2>
+      <p>Registre aqui os movimentos para que as abas da planilha sejam atualizadas sem preenchimento manual.</p>
+
+      <h3>Alimento recebido / entrada no estoque</h3>
+      <div class="form-grid">
+        <label>
+          Data
+          <input id="entry-date" type="date">
+        </label>
+        <label>
+          Origem / doador
+          <input id="entry-source" type="text">
+        </label>
+        <label>
+          Produto
+          <input id="entry-product" type="text" placeholder="BANANA">
+        </label>
+        <label>
+          Quantidade
+          <input id="entry-quantity" type="number" step="0.001" min="0">
+        </label>
+        <label>
+          Observacao
+          <input id="entry-note" type="text">
+        </label>
+        <button id="save-entry" type="button">Salvar entrada</button>
+      </div>
+
+      <h3>Saida / uso do estoque</h3>
+      <div class="form-grid">
+        <label>
+          Data
+          <input id="exit-date" type="date">
+        </label>
+        <label>
+          Destino / tarefa
+          <input id="exit-destination" type="text" placeholder="ACAO DE SABADO">
+        </label>
+        <label>
+          Produto
+          <input id="exit-product" type="text">
+        </label>
+        <label>
+          Quantidade
+          <input id="exit-quantity" type="number" step="0.001" min="0">
+        </label>
+        <label>
+          Observacao
+          <input id="exit-note" type="text">
+        </label>
+        <button id="save-exit" type="button">Salvar saida</button>
+      </div>
+
+      <h3>Doacao mensal recebida</h3>
+      <div class="form-grid">
+        <label>
+          Data
+          <input id="monthly-date" type="date">
+        </label>
+        <label>
+          Entidade / doador
+          <input id="monthly-entity" type="text">
+        </label>
+        <label>
+          Produto
+          <input id="monthly-product" type="text">
+        </label>
+        <label>
+          KG / quantidade
+          <input id="monthly-quantity" type="number" step="0.001" min="0">
+        </label>
+        <button id="save-monthly" type="button">Salvar doacao mensal</button>
+      </div>
+
+      <h3>Novo doador</h3>
+      <div class="form-grid">
+        <label>
+          Doador
+          <input id="donor-name" type="text">
+        </label>
+        <label>
+          Item
+          <input id="donor-item" type="text">
+        </label>
+        <label>
+          Contato
+          <input id="donor-contact" type="text">
+        </label>
+        <label>
+          Telefone
+          <input id="donor-phone" type="tel">
+        </label>
+        <label>
+          Responsavel
+          <input id="donor-owner" type="text">
+        </label>
+        <label>
+          CNPJ / CPF
+          <input id="donor-doc" type="text">
+        </label>
+        <label>
+          E-mail
+          <input id="donor-email" type="email">
+        </label>
+        <label>
+          Endereco
+          <input id="donor-address" type="text">
+        </label>
+        <button id="save-donor" type="button">Salvar doador</button>
+      </div>
+
+      <h3>Novo produto</h3>
+      <div class="form-grid">
+        <label>
+          Produto
+          <input id="product-name" type="text">
+        </label>
+        <label>
+          Unidade
+          <input id="product-unit" type="text" placeholder="KG">
+        </label>
+        <label>
+          Item / categoria
+          <input id="product-category" type="text" placeholder="FRUTAS">
+        </label>
+        <button id="save-product" type="button">Salvar produto</button>
+      </div>
+      <p class="status" id="launch-status">Os lancamentos serao enviados para as abas correspondentes da planilha.</p>
+    </section>
+
     <section class="section" id="dashboard" hidden>
       <h2>Resumo</h2>
       <div class="kpis" id="kpis"></div>
@@ -380,8 +511,14 @@
     const textReportButton = document.querySelector("#text-report");
     const checkinButton = document.querySelector("#load-checkin");
     const saveAttendanceButton = document.querySelector("#save-attendance");
+    const saveEntryButton = document.querySelector("#save-entry");
+    const saveExitButton = document.querySelector("#save-exit");
+    const saveMonthlyButton = document.querySelector("#save-monthly");
+    const saveDonorButton = document.querySelector("#save-donor");
+    const saveProductButton = document.querySelector("#save-product");
     const actionsPanel = document.querySelector("#actions-panel");
     const checkinStatusEl = document.querySelector("#checkin-status");
+    const launchStatusEl = document.querySelector("#launch-status");
 
     loadButton.addEventListener("click", loadReport);
     reloadButton.addEventListener("click", loadReport);
@@ -391,6 +528,11 @@
     textReportButton.addEventListener("click", loadTextReport);
     checkinButton.addEventListener("click", loadCheckin);
     saveAttendanceButton.addEventListener("click", saveAttendance);
+    saveEntryButton.addEventListener("click", saveInventoryEntry);
+    saveExitButton.addEventListener("click", saveInventoryExit);
+    saveMonthlyButton.addEventListener("click", saveMonthlyDonation);
+    saveDonorButton.addEventListener("click", saveDonor);
+    saveProductButton.addEventListener("click", saveProduct);
 
     function loadReport() {
       const code = document.querySelector("#team-code").value.trim();
@@ -625,6 +767,111 @@
       } catch (error) {
         checkinStatusEl.textContent = "Nao foi possivel salvar a presenca.";
       }
+    }
+
+    async function saveInventoryEntry() {
+      const payload = {
+        route: "inventoryEntry",
+        codigoEquipe: getTeamCode(),
+        data: document.querySelector("#entry-date").value,
+        origem: document.querySelector("#entry-source").value.trim(),
+        produto: document.querySelector("#entry-product").value.trim(),
+        quantidade: document.querySelector("#entry-quantity").value,
+        observacao: document.querySelector("#entry-note").value.trim()
+      };
+      if (!requireLaunchFields(payload, ["codigoEquipe", "data", "origem", "produto", "quantidade"])) return;
+      await postLaunch(payload, "Entrada registrada em ENTRADAS e SITE_MOVIMENTACOES.", ["#entry-source", "#entry-product", "#entry-quantity", "#entry-note"]);
+    }
+
+    async function saveInventoryExit() {
+      const payload = {
+        route: "inventoryExit",
+        codigoEquipe: getTeamCode(),
+        data: document.querySelector("#exit-date").value,
+        destino: document.querySelector("#exit-destination").value.trim(),
+        produto: document.querySelector("#exit-product").value.trim(),
+        quantidade: document.querySelector("#exit-quantity").value,
+        observacao: document.querySelector("#exit-note").value.trim()
+      };
+      if (!requireLaunchFields(payload, ["codigoEquipe", "data", "destino", "produto", "quantidade"])) return;
+      await postLaunch(payload, "Saida registrada em SAIDAS e SITE_MOVIMENTACOES.", ["#exit-destination", "#exit-product", "#exit-quantity", "#exit-note"]);
+    }
+
+    async function saveMonthlyDonation() {
+      const payload = {
+        route: "monthlyDonation",
+        codigoEquipe: getTeamCode(),
+        data: document.querySelector("#monthly-date").value,
+        entidade: document.querySelector("#monthly-entity").value.trim(),
+        produto: document.querySelector("#monthly-product").value.trim(),
+        quantidade: document.querySelector("#monthly-quantity").value
+      };
+      if (!requireLaunchFields(payload, ["codigoEquipe", "data", "entidade", "produto", "quantidade"])) return;
+      await postLaunch(payload, "Doacao mensal registrada em DOACAO MENSAL.", ["#monthly-entity", "#monthly-product", "#monthly-quantity"]);
+    }
+
+    async function saveDonor() {
+      const payload = {
+        route: "donor",
+        codigoEquipe: getTeamCode(),
+        doador: document.querySelector("#donor-name").value.trim(),
+        item: document.querySelector("#donor-item").value.trim(),
+        contato: document.querySelector("#donor-contact").value.trim(),
+        telefone: document.querySelector("#donor-phone").value.trim(),
+        responsavel: document.querySelector("#donor-owner").value.trim(),
+        cnpjCpf: document.querySelector("#donor-doc").value.trim(),
+        email: document.querySelector("#donor-email").value.trim(),
+        endereco: document.querySelector("#donor-address").value.trim()
+      };
+      if (!requireLaunchFields(payload, ["codigoEquipe", "doador", "item"])) return;
+      await postLaunch(payload, "Doador registrado em ANJOS DOADORES.", ["#donor-name", "#donor-item", "#donor-contact", "#donor-phone", "#donor-owner", "#donor-doc", "#donor-email", "#donor-address"]);
+    }
+
+    async function saveProduct() {
+      const payload = {
+        route: "product",
+        codigoEquipe: getTeamCode(),
+        produto: document.querySelector("#product-name").value.trim(),
+        unidade: document.querySelector("#product-unit").value.trim(),
+        item: document.querySelector("#product-category").value.trim()
+      };
+      if (!requireLaunchFields(payload, ["codigoEquipe", "produto", "unidade", "item"])) return;
+      await postLaunch(payload, "Produto registrado em PRODUTOS.", ["#product-name", "#product-unit", "#product-category"]);
+    }
+
+    async function postLaunch(payload, successMessage, fieldsToClear) {
+      launchStatusEl.textContent = "Salvando lancamento...";
+      try {
+        await fetch(CONFIG.appsScriptUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        fieldsToClear.forEach((selector) => {
+          const field = document.querySelector(selector);
+          if (field) field.value = "";
+        });
+        launchStatusEl.textContent = successMessage;
+        if (document.querySelector("#date-from").value || document.querySelector("#date-to").value) {
+          setTimeout(loadReport, 900);
+        }
+      } catch (error) {
+        launchStatusEl.textContent = "Nao foi possivel salvar o lancamento.";
+      }
+    }
+
+    function requireLaunchFields(payload, fields) {
+      const missing = fields.filter((field) => !String(payload[field] || "").trim());
+      if (missing.length) {
+        launchStatusEl.textContent = "Preencha os campos obrigatorios antes de salvar.";
+        return false;
+      }
+      return true;
+    }
+
+    function getTeamCode() {
+      return document.querySelector("#team-code").value.trim();
     }
 
     function downloadCsv() {
